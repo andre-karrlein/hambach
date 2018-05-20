@@ -22,8 +22,9 @@ public class Factory
         let layout = self.createTemplate(page: "Layout")
         let navbar = self.createNavBar(type: "Main")
         let articleCreator = self.createArticleCreator(template: template)
+        let indexCreator = self.createIndexCreator(template: template)
 
-        return ResponseCreator(layout: layout, navbar: navbar, articleCreator: articleCreator)
+        return ResponseCreator(layout: layout, navbar: navbar, articleCreator: articleCreator, indexCreator: indexCreator)
     }
 
     private func createTemplate(page: String) -> HtmlTemplate
@@ -39,5 +40,10 @@ public class Factory
     private func createArticleCreator(template: String) -> ArticleCreator
     {
         return ArticleCreator(articleLayout: HtmlTemplate(path: "/html/" + template + ".html"))
+    }
+
+    private func createIndexCreator(template: String) -> IndexCreator
+    {
+        return IndexCreator(articleLayout: HtmlTemplate(path: "/html/" + template + ".html"))
     }
 }
