@@ -15,8 +15,9 @@ final class Content: Model
     var article: String
     var category: String
     var type: String
+    var titleImage: String
 
-    init(contentId: Int, title: String, creator: Int, date: String, article: String, category: String, type: String)
+    init(contentId: Int, title: String, creator: Int, date: String, article: String, category: String, type: String, titleImage: String)
     {
         self.contentId = contentId
         self.title = title
@@ -25,5 +26,6 @@ final class Content: Model
         self.article = article
         self.category = category
         self.type = type
+        self.titleImage = titleImage
     }
 }
