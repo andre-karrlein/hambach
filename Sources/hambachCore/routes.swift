@@ -6,21 +6,39 @@ public func routes(_ router: Router) throws
 {
     router.get("/") { request -> Future<HTTPResponse> in
         return request.withPooledConnection(to: .mysql) { db -> Future<HTTPResponse> in
-            let responseCreator = factory.createResponseCreator(template: "Index")
+            let responseCreator = factory.createResponseCreator(template: "Index", nav: "Main")
             return db.query(Content.self).all().map(to: HTTPResponse.self) { content in
-                return try responseCreator.createResponse(content: content, page: "Index")
+                return try responseCreator.createResponse(content: content, page: "Index", type: "Allgemein")
+            }
+        }
+    }
+
+    router.get("fussball") { request -> Future<HTTPResponse> in
+        return request.withPooledConnection(to: .mysql) { db -> Future<HTTPResponse> in
+            let responseCreator = factory.createResponseCreator(template: "Index", nav: "Fussball")
+            return db.query(Content.self).all().map(to: HTTPResponse.self) { content in
+                return try responseCreator.createResponse(content: content, page: "Index", type: "Fussball")
+            }
+        }
+    }
+
+    router.get("korbball") { request -> Future<HTTPResponse> in
+        return request.withPooledConnection(to: .mysql) { db -> Future<HTTPResponse> in
+            let responseCreator = factory.createResponseCreator(template: "Index", nav: "Korbball")
+            return db.query(Content.self).all().map(to: HTTPResponse.self) { content in
+                return try responseCreator.createResponse(content: content, page: "Index", type: "Korbball")
             }
         }
     }
 
     router.get("sportheim") { request -> Future<HTTPResponse> in
         return request.withPooledConnection(to: .mysql) { db -> Future<HTTPResponse> in
-            let responseCreator = factory.createResponseCreator(template: "Carousel")
+            let responseCreator = factory.createResponseCreator(template: "Carousel", nav: "Main")
             return try Content.find(1, on: db).map(to: HTTPResponse.self) { content in
                 guard let content = content else {
                     throw Abort(.notFound, reason: "Could not find content.")
                 }
-                return try responseCreator.createResponse(content: [content], page: "Article")
+                return try responseCreator.createResponse(content: [content], page: "Article", type: "Sportheim")
             }
         }
     }
@@ -33,8 +51,8 @@ public func routes(_ router: Router) throws
                 guard let content = content else {
                     throw Abort(.notFound, reason: "Could not find content.")
                 }
-                let responseCreator = factory.createResponseCreator(template: content.type.capitalized)
-                return try responseCreator.createResponse(content: [content], page: "Article")
+                let responseCreator = factory.createResponseCreator(template: content.type.capitalized, nav: content.category.capitalized)
+                return try responseCreator.createResponse(content: [content], page: "Article", type: content.category.capitalized)
             }
         }
     }
