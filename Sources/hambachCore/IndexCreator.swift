@@ -11,30 +11,37 @@ public class IndexCreator
         self.articleLayout = articleLayout
     }
 
-    func createIndex(content: [Content]) throws -> String
+    func createIndex(content: [Content], type: String) throws -> String
     {
-        let article = try self.replacePlaceholder(content: content)
+        let article = try self.replacePlaceholder(content: content, type: type)
 
         return article
     }
 
-    private func replacePlaceholder(content: [Content]) throws -> String
+    private func replacePlaceholder(content: [Content], type: String) throws -> String
     {
         let articleLayoutString = try self.articleLayout.getTemplate()
 
-        return articleLayoutString.replacingOccurrences(of: "%carousel%", with: try self.createCarousel(content: content))
+        return articleLayoutString.replacingOccurrences(of: "%carousel%", with: try self.createCarousel(content: content, type: type))
     }
 
-    private func createCarousel(content: [Content])  throws -> String
+    private func createCarousel(content: [Content], type: String)  throws -> String
     {
         var carousel = ""
-        var image = "/images/hambach_logo.png"
-        let content = Array(content.suffix(3))
         var counter = 0
         var active = ""
+        var image = ""
         for contentItem in content {
+            if (contentItem.type != "article" || contentItem.category != type) {
+                continue
+            }
+            if (counter == 3) {
+                break
+            }
             if (contentItem.titleImage != "") {
                 image = contentItem.titleImage
+            } else {
+                image = "/images/hambach_logo.png"
             }
             if (counter == 0) {
                 active = "active"

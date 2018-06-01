@@ -16,10 +16,10 @@ public class ResponseCreator
         self.indexCreator = indexCreator
     }
 
-    func createResponse(content: [Content], page: String) throws -> HTTPResponse
+    func createResponse(content: [Content], page: String, type: String) throws -> HTTPResponse
     {
         if (page == "Index") {
-            return HTTPResponse(status: .ok, body: try self.createIndexResponseBody(content: content))
+            return HTTPResponse(status: .ok, body: try self.createIndexResponseBody(content: content, type: type))
         }
         return HTTPResponse(status: .ok, body: try self.createArticleResponseBody(content: content[0]))
     }
@@ -34,12 +34,12 @@ public class ResponseCreator
         return layout.replacingOccurrences(of: "%content%", with: article)
     }
 
-    private func createIndexResponseBody(content: [Content]) throws -> String
+    private func createIndexResponseBody(content: [Content], type: String) throws -> String
     {
         let layoutString = try self.layout.getTemplate()
         let navbarString = try self.navbar.getTemplate()
         let layout = layoutString.replacingOccurrences(of: "%navbar%", with: navbarString)
-        let article = try self.indexCreator.createIndex(content: content)
+        let article = try self.indexCreator.createIndex(content: content, type: type)
 
         return layout.replacingOccurrences(of: "%content%", with: article)
     }
