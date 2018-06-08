@@ -31,7 +31,7 @@ public class IndexCreator
         var counter = 0
         var active = ""
         var image = ""
-        for contentItem in content {
+        for contentItem in content.reversed() {
             if (contentItem.type != "article" || contentItem.category != type) {
                 continue
             }
