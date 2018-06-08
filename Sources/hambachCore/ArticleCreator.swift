@@ -21,11 +21,13 @@ public class ArticleCreator
     private func replacePlaceholder(content: Content) throws -> String
     {
         let articleLayoutString = try self.articleLayout.getTemplate()
-        let firstname = "André"
-        let lastname = "Karrlein"
+        var name = "André Karrlein"
+        if (content.creator == 2) {
+            name = "Philipp Niedermeyer"
+        }
 
         var article = articleLayoutString.replacingOccurrences(of: "%title%", with: content.title)
-        article = article.replacingOccurrences(of: "%user%", with: firstname + " " + lastname)
+        article = article.replacingOccurrences(of: "%user%", with: name)
         article = article.replacingOccurrences(of: "%date%", with: content.date)
         article = article.replacingOccurrences(of: "%article%", with: content.article)
 
