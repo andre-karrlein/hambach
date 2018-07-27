@@ -17,13 +17,14 @@ public class Factory
         return app
     }
 
-    public func createResponseCreator(template: String) -> ResponseCreator
+    public func createResponseCreator(template: String, nav: String) -> ResponseCreator
     {
         let layout = self.createTemplate(page: "Layout")
-        let navbar = self.createNavBar(type: "Main")
+        let navbar = self.createNavBar(type: nav)
         let articleCreator = self.createArticleCreator(template: template)
+        let indexCreator = self.createIndexCreator(template: template)
 
-        return ResponseCreator(layout: layout, navbar: navbar, articleCreator: articleCreator)
+        return ResponseCreator(layout: layout, navbar: navbar, articleCreator: articleCreator, indexCreator: indexCreator)
     }
 
     private func createTemplate(page: String) -> HtmlTemplate
@@ -33,11 +34,19 @@ public class Factory
 
     private func createNavBar(type: String) -> HtmlTemplate
     {
-        return HtmlTemplate(path: "/html/" + type + "Navbar.html")
+        if (type == "Fussball" || type == "Korbball") {
+            return HtmlTemplate(path: "/html/" + type + "Navbar.html")
+        }
+        return HtmlTemplate(path: "/html/MainNavbar.html")
     }
 
     private func createArticleCreator(template: String) -> ArticleCreator
     {
         return ArticleCreator(articleLayout: HtmlTemplate(path: "/html/" + template + ".html"))
+    }
+
+    private func createIndexCreator(template: String) -> IndexCreator
+    {
+        return IndexCreator(articleLayout: HtmlTemplate(path: "/html/" + template + ".html"))
     }
 }
