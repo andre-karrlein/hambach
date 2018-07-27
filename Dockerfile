@@ -11,7 +11,7 @@ FROM ubuntu:16.04
 WORKDIR /app
 
 RUN apt-get -qq update && apt-get install -y \
-  libicu55 libxml2 libbsd0 libcurl3 libatomic1 \
+  libicu55 libxml2 libbsd0 libcurl3 libatomic1 libmysqlclient20 \
   && rm -r /var/lib/apt/lists/*
 
 COPY Public/ ./Public/
