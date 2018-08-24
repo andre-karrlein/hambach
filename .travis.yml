@@ -4,11 +4,11 @@ language: bash
 
 jobs:
     stages:
-        - test
+        #- test
         - build docker image
     include:
-        - stage: test
-          script: docker run --rm -v $(pwd):/app -w /app swift swift test
+        #- stage: test
+        #  script: docker run --rm -v $(pwd):/app -w /app swift swift test
         - stage: build docker image
           script:
             - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
