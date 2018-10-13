@@ -15,7 +15,7 @@ public func routes(_ router: Router) throws
 
     router.get("fussball") { request -> Future<HTTPResponse> in
         return request.withPooledConnection(to: .mysql) { db -> Future<HTTPResponse> in
-            let responseCreator = factory.createResponseCreator(template: "Index", nav: "Fussball")
+            let responseCreator = factory.createResponseCreator(template: "IndexFussball", nav: "Fussball")
             return db.query(Content.self).all().map(to: HTTPResponse.self) { content in
                 return try responseCreator.createResponse(content: content, page: "Index", type: "Fussball")
             }
