@@ -52,8 +52,10 @@ public class IndexCreator
                 throw Abort(.notFound, reason: "No content id found.")
             }
             carousel += "<div class=\"carousel-item " + active + "\" style=\"background-image: url('" + image +  "')\">"
-            carousel += "<div class=\"carousel-caption d-block bg-success text-white\"><h3>"
-            carousel += "<a href=\"/article/\(id)\" class=\"text-white\">" + contentItem.title + "</a>"
+            if (contentItem.title != "" && contentItem.title != " ") {
+                carousel += "<div class=\"carousel-caption d-block bg-success text-white\"><h3>"
+                carousel += "<a href=\"/article/\(id)\" class=\"text-white\">" + contentItem.title + "</a>"
+            }
             carousel += "</h3></div></div>"
             counter += 1
         }
