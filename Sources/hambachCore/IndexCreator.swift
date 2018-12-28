@@ -35,7 +35,7 @@ public class IndexCreator
             if (contentItem.type != "article" || contentItem.category != type) {
                 continue
             }
-            if (counter == 3) {
+            if (counter == 4) {
                 break
             }
             if (contentItem.titleImage != "") {
