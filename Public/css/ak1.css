@@ -300,3 +300,7 @@ p {
     height: 400px;
     max-width: 800px;
 }
+
+.carousel-inner > .item > img {
+    min-width: 100%;
+}
