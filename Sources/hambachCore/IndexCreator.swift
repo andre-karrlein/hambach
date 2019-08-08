@@ -51,12 +51,13 @@ public class IndexCreator
             guard let id = contentItem.contentId else {
                 throw Abort(.notFound, reason: "No content id found.")
             }
-            carousel += "<div class=\"carousel-item " + active + "\" style=\"background-image: url('" + image +  "')\">"
+            carousel += "<div class=\"carousel-item " + active + "\">"
+            carousel += "<img src=\"" + image + "\" alt=\"....\">"
             if (contentItem.title != "" && contentItem.title != " ") {
                 carousel += "<div class=\"carousel-caption d-block bg-success text-white\"><h3>"
-                carousel += "<a href=\"/article/\(id)\" class=\"text-white\">" + contentItem.title + "</a>"
+                carousel += "<a href=\"/article/\(id)\" class=\"text-white\">" + contentItem.title + "</a></h3>"
             }
-            carousel += "</h3></div></div>"
+            carousel += "</div></div>"
             counter += 1
         }
 

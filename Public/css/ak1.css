@@ -248,6 +248,16 @@ html {
     max-height: 100%;
 }
 
+.img-responsive,
+.thumbnail > img,
+.thumbnil a > img,
+.carousel-inner > .carousel-item > img,
+.carousel-inner > .carousel-item > a > img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
 @media screen and (max-height: 450px) {
     .sidenav {
