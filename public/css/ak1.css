@@ -38,7 +38,7 @@
     background-image: linear-gradient(
             rgba(0, 0, 0, 0.5),
             rgba(0, 0, 0, 0.5)
-    ), url('/images/hambach_logo.png');
+    ), url('/public/images/hambach_logo.png');
     width: 800px;
     z-index: -1;
 }
@@ -125,7 +125,7 @@ footer ul li{
 
 body {
     background-color: #008000;
-    background-image: url(/images/Sportplatz-Luft.jpg);
+    background-image: url(/public/images/Sportplatz-Luft.jpg);
     background-attachment: fixed;
     color: #ffffff;
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
