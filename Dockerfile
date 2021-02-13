@@ -1,6 +1,6 @@
 FROM golang as builder
 
-COPY main.go /go/build/main.go
+COPY src/main.go /go/build/main.go
 COPY go.mod /go/build/go.mod
 COPY go.sum /go/build/go.sum
 
