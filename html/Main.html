@@ -13,7 +13,11 @@
                     {{if .Title}}
                         <div class="carousel-caption d-block bg-success text-white">
                             <h3>
+                                {{if .Link}}
+                                <a target="_blank" href="{{.Link}}" class="text-white"> {{.Title}}</a>
+                                {{else}}
                                 <a href="/article/{{.ID}}" class="text-white"> {{.Title}}</a>
+                                {{end}}
                             </h3>
                         </div>
                     {{end}}

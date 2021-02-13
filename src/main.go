@@ -8,6 +8,7 @@ import (
 
 	"cloud.google.com/go/firestore"
 	"github.com/gorilla/mux"
+	"google.golang.org/api/iterator"
 )
 
 // Article struct
@@ -19,9 +20,9 @@ type Article struct {
 	Type     string
 	Image    string
 	Creator  string
-	Editor   string
-	Content  string
+	Content  template.HTML
 	Active   string
+	Link     string
 }
 
 func handleHome(w http.ResponseWriter, r *http.Request) {
@@ -30,44 +31,8 @@ func handleHome(w http.ResponseWriter, r *http.Request) {
 		log.Fatal(err.Error())
 	}
 
-	data := []Article{
-		{
-			ID:       1,
-			Title:    "TESTING",
-			Date:     "01.01.2021",
-			Category: "Allgemein",
-			Type:     "article",
-			Image:    "/public/images/hambach_logo.png",
-			Creator:  "Andre Karrlein",
-			Editor:   "Andre Karrlein",
-			Content:  "<p>HAMBACH HTML DATA<p>",
-			Active:   "active",
-		},
-		{
-			ID:       2,
-			Title:    "TESTING 2",
-			Date:     "01.02.2021",
-			Category: "Allgemein",
-			Type:     "article",
-			Image:    "/public/images/hambach_logo.png",
-			Creator:  "Andre Karrlein",
-			Editor:   "Andre Karrlein",
-			Content:  "<p>HAMBACH HTML DATA<p>",
-			Active:   "",
-		},
-		{
-			ID:       3,
-			Title:    "TESTING 3",
-			Date:     "01.03.2021",
-			Category: "Allgemein",
-			Type:     "article",
-			Image:    "/public/images/hambach_logo.png",
-			Creator:  "Andre Karrlein",
-			Editor:   "Andre Karrlein",
-			Content:  "<p>HAMBACH HTML DATA<p>",
-			Active:   "",
-		},
-	}
+	data := loadArticles("Allgemein")
+
 	w.WriteHeader(http.StatusOK)
 	tmpl.Execute(w, data)
 }
@@ -77,19 +42,54 @@ func handleSportheim(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Fatal(err.Error())
 	}
+
+	article := loadArticle("1")
+
 	w.WriteHeader(http.StatusOK)
-	tmpl.Execute(w, Article{
-		ID:       4,
-		Title:    "Sporthiem",
-		Date:     "01.03.2021",
-		Category: "Allgemein",
-		Type:     "article",
-		Image:    "/public/images/hambach_logo.png",
-		Creator:  "Andre Karrlein",
-		Editor:   "Andre Karrlein",
-		Content:  "<p>HAMBACH HTML DATA<p>",
-		Active:   "",
-	})
+	tmpl.Execute(w, article)
+}
+
+func handleSoccer(w http.ResponseWriter, r *http.Request) {
+	tmpl, err := template.ParseFiles("../html/Layout.html", "../html/IndexFussball.html", "../html/FussballNavbar.html", "../html/Carousel.html")
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+	w.WriteHeader(http.StatusOK)
+	articles := loadArticles("Fussball")
+
+	tmpl.Execute(w, articles)
+}
+
+func handleKorbball(w http.ResponseWriter, r *http.Request) {
+	tmpl, err := template.ParseFiles("../html/Layout.html", "../html/Main.html", "../html/KorbballNavbar.html", "../html/Carousel.html")
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+	w.WriteHeader(http.StatusOK)
+	articles := loadArticles("Korbball")
+
+	tmpl.Execute(w, articles)
+}
+
+func handleArticle(w http.ResponseWriter, r *http.Request) {
+	id := mux.Vars(r)["id"]
+	article := loadArticle(id)
+
+	navbar := "../html/MainNavbar.html"
+	if article.Category == "Fussball" {
+		navbar = "../html/FussballNavbar.html"
+	}
+	if article.Category == "Korbball" {
+		navbar = "../html/KorbballNavbar.html"
+	}
+
+	tmpl, err := template.ParseFiles("../html/Layout.html", navbar, "../html/Article.html")
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+
+	w.WriteHeader(http.StatusOK)
+	tmpl.Execute(w, article)
 }
 
 func notImplemented(w http.ResponseWriter, r *http.Request) {
@@ -97,14 +97,14 @@ func notImplemented(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusNotImplemented)
 }
 
-/*func loadData() []data {
+func loadArticles(category string) []Article {
 	ctx := context.Background()
 	client := createClient(ctx)
 	defer client.Close()
 
-	var expirences []experience
+	var articles []Article
 
-	iter := client.Collection("resume").Doc("JrEvSIoWiSgTgXQRIC6I").Collection("experience").OrderBy("order", firestore.Asc).Documents(ctx)
+	iter := client.Collection("articles").OrderBy("id", firestore.Desc).Documents(ctx)
 	for {
 		doc, err := iter.Next()
 		if err == iterator.Done {
@@ -114,14 +114,31 @@ func notImplemented(w http.ResponseWriter, r *http.Request) {
 			log.Fatalf("Failed to iterate: %v", err)
 		}
 
-		var e experience
-		doc.DataTo(&e)
+		var a Article
+		doc.DataTo(&a)
 
-		expirences = append(expirences, e)
+		if a.Category == category && a.Type == "article" {
+			articles = append(articles, a)
+		}
 	}
 
-	return expirences
-}*/
+	return articles
+}
+
+func loadArticle(id string) Article {
+	ctx := context.Background()
+	client := createClient(ctx)
+	defer client.Close()
+
+	result, err := client.Collection("articles").Doc(id).Get(ctx)
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+	var a Article
+	result.DataTo(&a)
+
+	return a
+}
 
 func main() {
 	r := mux.NewRouter()
@@ -130,6 +147,9 @@ func main() {
 
 	r.HandleFunc("/", handleHome).Methods(http.MethodGet)
 	r.HandleFunc("/sportheim", handleSportheim).Methods(http.MethodGet)
+	r.HandleFunc("/fussball", handleSoccer).Methods(http.MethodGet)
+	r.HandleFunc("/korbball", handleKorbball).Methods(http.MethodGet)
+	r.HandleFunc("/article/{id}", handleArticle).Methods(http.MethodGet)
 	r.
 		PathPrefix(staticDir).
 		Handler(http.StripPrefix(staticDir, http.FileServer(http.Dir(".."+staticDir))))
@@ -140,7 +160,7 @@ func main() {
 
 func createClient(ctx context.Context) *firestore.Client {
 	// Sets your Google Cloud Platform project ID.
-	projectID := "karrlein" // os.Getenv("PROJECT_ID")
+	projectID := "hambach" // os.Getenv("PROJECT_ID")
 
 	client, err := firestore.NewClient(ctx, projectID)
 	if err != nil {
