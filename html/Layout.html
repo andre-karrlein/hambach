@@ -12,12 +12,12 @@
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
     <!-- Custom CSS -->
-    <link href="/css/modern-business.css" rel="stylesheet">
-    <link href="/css/ak1.css" rel="stylesheet">
-    <link href="/css/ionicons.css" rel="stylesheet">
+    <link href="/public/css/modern-business.css" rel="stylesheet">
+    <link href="/public/css/ak1.css" rel="stylesheet">
+    <link href="/public/css/ionicons.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="/public/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <script type='text/javascript'>
         (function () {
             var useSSL = 'https:' == document.location.protocol;
@@ -29,8 +29,8 @@
 </head>
 <body>
     <div id="main">
-        %navbar%
-        %content%
+        {{ template "navbar" .}}
+        {{ template "body" . }}
     </div>
     <footer>
         <div class="container">
@@ -67,16 +67,16 @@
                     <ul class="adress">
                         <span>Sponsoring</span>
                         <li class="col-lg-8">
-                            <img class="images fill" src="/images/sponsoring/atb.png">
+                            <img class="images fill" src="/public/images/sponsoring/atb.png">
                         </li>
                         <li class="col-lg-8">
-                            <img class="images fill" src="/images/sponsoring/pabst.jpg">
+                            <img class="images fill" src="/public/images/sponsoring/pabst.jpg">
                         </li>
                         <li class="col-lg-8">
-                            <img class="images fill" src="/images/sponsoring/delphi.jpg">
+                            <img class="images fill" src="/public/images/sponsoring/delphi.jpg">
                         </li>
                         <li class="col-lg-8">
-                            <img class="images fill" src="/images/sponsoring/tucher.png">
+                            <img class="images fill" src="/public/images/sponsoring/tucher.png">
                         </li>
                     </ul>
                 </div>
@@ -88,6 +88,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.js"></script>
-    <script src="/js/scripts.js"></script>
+    <script src="/public/js/scripts.js"></script>
 </body>
 </html>

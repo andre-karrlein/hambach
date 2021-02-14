@@ -1,23 +1,25 @@
-FROM swift:4 as builder
+FROM golang as builder
 
-COPY . /application
-WORKDIR /application
+COPY src/main.go /go/build/main.go
+COPY go.mod /go/build/go.mod
+COPY go.sum /go/build/go.sum
 
-RUN mkdir -p /build/lib && cp -R /usr/lib/swift/linux/*.so /build/lib
-RUN swift build -c release && mv `swift build -c release --show-bin-path` /build/bin
+WORKDIR /go/build/
 
-FROM ubuntu:16.04
+RUN go mod download
 
-WORKDIR /app
+RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o hambach .
 
-RUN apt-get -qq update && apt-get install -y \
-  libicu55 libxml2 libbsd0 libcurl3 libatomic1 libmysqlclient20 \
-  && rm -r /var/lib/apt/lists/*
+FROM alpine:3.10
 
-COPY Public/ ./Public/
-COPY --from=builder /build/bin/hambach .
-COPY --from=builder /build/lib/* /usr/lib/
-COPY /html/ ./html/
+RUN mkdir /code
+WORKDIR /code
+
+COPY --from=builder /go/build/hambach /hambach
+COPY public /public
+COPY html /html
 
 EXPOSE 8080
-ENTRYPOINT ["./hambach"]
+
+CMD ["/hambach"]
+
