@@ -156,6 +156,9 @@ func main() {
 	r.
 		PathPrefix("/images/").
 		Handler(http.StripPrefix("/images/", http.FileServer(http.Dir(".."+staticDir+"images/"))))
+	r.
+		PathPrefix("/download-data/").
+		Handler(http.StripPrefix("/download-data/", http.FileServer(http.Dir(".."+staticDir+"download-data/"))))
 	
 
 	log.Fatal(http.ListenAndServe(":8080", r))
