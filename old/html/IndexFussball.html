@@ -1,0 +1,13 @@
+{{ define "body" }}
+<header>
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner" role="listbox">
+            {{range .}}
+                <div class="carousel-item active">
+                    <img src="{{.Image}}" alt="title image">"
+                </div>
+            {{end}}
+        </div>
+    </div>
+</header>
+{{ end }}

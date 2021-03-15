@@ -1,0 +1,37 @@
+{{ define "body"}}
+<header>
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            {{range $index, $value := .}}
+            <li data-target="#carouselExampleIndicators" data-slide-to="{{$index}}" class="{{.Active}}"></li>
+            {{end}}
+        </ol>
+        <div class="carousel-inner" role="listbox">
+            {{range .}}
+                <div class="carousel-item {{.Active}}">
+                    <img src="{{.Image}}" alt="title image">"
+                    {{if .Title}}
+                        <div class="carousel-caption d-block bg-success text-white">
+                            <h3>
+                                {{if .Link}}
+                                <a target="_blank" href="{{.Link}}" class="text-white"> {{.Title}}</a>
+                                {{else}}
+                                <a href="/article/{{.ID}}" class="text-white"> {{.Title}}</a>
+                                {{end}}
+                            </h3>
+                        </div>
+                    {{end}}
+                </div>
+            {{end}}
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+</header>
+{{end}}
