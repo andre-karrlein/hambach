@@ -22,7 +22,6 @@ type home struct {
 
 	article               [][]Content
 	article_without_chunk []Content
-	item                  Content
 }
 
 type footer struct {
@@ -183,12 +182,6 @@ func (h *home) OnMount(ctx app.Context) {
 	go h.doRequest()
 }
 
-func (h *home) onClick(ctx app.Context, e app.Event) {
-	id := ctx.JSSrc.Get("id").String()
-	log.Println(id)
-	app.Navigate("/article/" + id)
-}
-
 func (h *home) doRequest() {
 	resp, err := http.Get("/api/v1/articles")
 	if err != nil {
@@ -258,8 +251,13 @@ func chunkSlice(slice []Content, chunkSize int) [][]Content {
 }
 
 func (f *footer) Render() app.UI {
-	return app.Div().Class("footer is-success").Body(
-		app.Div().Text("Andre Karrlein"),
+	return app.Footer().Class("footer").Body(
+		app.Div().Class("content has-text-centered").Body(
+			app.P().Body(
+				app.Text("Made by "),
+				app.A().Href("https://karrlein.com").Target("__blank").Text("André Karrlein"),
+			),
+		),
 	)
 }
 

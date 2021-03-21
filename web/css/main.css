@@ -9,3 +9,6 @@
     background-color: #008000;
     background-image: url("/web/images/Sportplatz-Luft.jpg");
 }
+.is-success {
+    background-color: #008000 !important;
+}
