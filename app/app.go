@@ -24,10 +24,6 @@ type home struct {
 	article_without_chunk []Content
 }
 
-type footer struct {
-	app.Compo
-}
-
 // Content struct
 type Content struct {
 	ID       int    `json:"id"`
@@ -64,7 +60,7 @@ func (n *navbar) Render() app.UI {
 				app.A().Class("navbar-item").Href("/article/47").Text(
 					"Termine",
 				),
-				app.A().Class("navbar-item").Href("/article/1").Text(
+				app.A().Class("navbar-item").Href("/sportheim").Text(
 					"Sportheim",
 				),
 				app.Div().Class("navbar-item has-dropdown").Class(n.dropdown).Body(
@@ -250,15 +246,24 @@ func chunkSlice(slice []Content, chunkSize int) [][]Content {
 	return chunks
 }
 
-func (f *footer) Render() app.UI {
-	return app.Footer().Class("footer").Body(
-		app.Div().Class("content has-text-centered").Body(
-			app.P().Body(
-				app.Text("Made by "),
-				app.A().Href("https://karrlein.com").Target("__blank").Text("André Karrlein"),
-			),
-		),
-	)
+func chunksOfStrings(slice []string, chunkSize int) [][]string {
+	var chunks [][]string
+	for {
+		if len(slice) == 0 {
+			break
+		}
+
+		// necessary check to avoid slicing beyond
+		// slice capacity
+		if len(slice) < chunkSize {
+			chunkSize = len(slice)
+		}
+
+		chunks = append(chunks, slice[0:chunkSize])
+		slice = slice[chunkSize:]
+	}
+
+	return chunks
 }
 
 func main() {
@@ -266,5 +271,6 @@ func main() {
 	app.RouteWithRegexp("^/article.*", &article{})
 	app.Route("/fussball", &fussball{})
 	app.Route("/korbball", &korbball{})
+	app.Route("/sportheim", &sportheim{})
 	app.Run()
 }
