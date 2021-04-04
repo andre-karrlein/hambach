@@ -19,7 +19,7 @@ RUN mkdir -p web/css
 RUN mkdir -p web/images
 
 COPY web/css/main.css web/css/.
-COPY web/images/* web/images/
+COPY web/images/. web/images/
 COPY --from=builder /go/build/hambach .
 COPY --from=builder /go/build/web/app.wasm web/.
 
