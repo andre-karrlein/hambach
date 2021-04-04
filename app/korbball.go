@@ -5,16 +5,13 @@ import "github.com/maxence-charriere/go-app/v7/pkg/app"
 type korbballNavbar struct {
 	app.Compo
 
-	active   string
-	dropdown string
+	active        string
+	dropdown      string
+	youthDropdown string
 }
 
 type korbball struct {
 	app.Compo
-
-	article               [][]Content
-	article_without_chunk []Content
-	item                  Content
 }
 
 func (kn *korbballNavbar) Render() app.UI {
@@ -32,36 +29,33 @@ func (kn *korbballNavbar) Render() app.UI {
 		),
 		app.Div().Class("navbar-menu").ID("navbarMenu").Class(kn.active).Body(
 			app.Div().Class("navbar-start").Body(
-				app.Div().Class("navbar-item").Body(
-					app.A().Text(
-						"Fussball",
-					).Href("/fussball"),
+				app.A().Class("navbar-item").Href("/article/22").Text(
+					"Kontakt",
 				),
-				app.Div().Class("navbar-item").Body(
-					app.A().Text(
-						"Mannschaft",
-					).Href("/article/12"),
+				app.A().Class("navbar-item").Href("/article/23").Text(
+					"Chronik",
 				),
-				app.Div().Class("navbar-item").Body(
-					app.A().Text(
-						"Ergebnisse und Tabellen",
-					).Href("/article/13"),
+				app.A().Class("navbar-item").Href("/article/24").Text(
+					"Mannschaft I, II & III",
 				),
-				app.Div().Class("navbar-item").Body(
-					app.A().Text(
-						"Kontakt",
-					).Href("/article/11"),
-				),
-				// NACHWUCHS DROPDOWN
-				app.Div().Class("navbar-item").Body(
-					app.A().Text(
-						"Senioren",
-					).Href("/article/14"),
-				),
-				app.Div().Class("navbar-item").Body(
-					app.A().Text(
-						"Chronik",
-					).Href("/article/72"),
+				app.Div().Class("navbar-item has-dropdown").Class(kn.youthDropdown).Body(
+					app.Span().Class("navbar-link").Text(
+						"Nachwuchs",
+					).OnClick(kn.youthDropdownClick),
+					app.Div().Class("navbar-dropdown").Body(
+						app.A().Class("navbar-item").Href("/article/25").Text(
+							"Jugend 19",
+						),
+						app.A().Class("navbar-item").Href("/article/26").Text(
+							"Jugend 15",
+						),
+						app.A().Class("navbar-item").Href("/article/27").Text(
+							"Jugend 12",
+						),
+						app.A().Class("navbar-item").Href("/article/28").Text(
+							"Jugend 9",
+						),
+					),
 				),
 				app.Div().Class("navbar-item has-dropdown").Class(kn.dropdown).Body(
 					app.Span().Class("navbar-link").Text(
@@ -73,7 +67,7 @@ func (kn *korbballNavbar) Render() app.UI {
 						).Href("/fussball"),
 						app.A().Class("navbar-item").Text(
 							"Korbball",
-						).Href("/korbball"),
+						).Href("/article/24"),
 						app.A().Class("navbar-item").Text(
 							"Theater",
 						).Href("/article/42"),
@@ -130,6 +124,15 @@ func (kn *korbballNavbar) dropdownClick(ctx app.Context, e app.Event) {
 		kn.dropdown = ""
 	} else {
 		kn.dropdown = "is-active"
+	}
+	kn.Update()
+}
+
+func (kn *korbballNavbar) youthDropdownClick(ctx app.Context, e app.Event) {
+	if kn.youthDropdown == "is-active" {
+		kn.youthDropdown = ""
+	} else {
+		kn.youthDropdown = "is-active"
 	}
 	kn.Update()
 }

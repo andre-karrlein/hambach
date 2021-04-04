@@ -5,16 +5,13 @@ import "github.com/maxence-charriere/go-app/v7/pkg/app"
 type fussballNavbar struct {
 	app.Compo
 
-	active   string
-	dropdown string
+	active        string
+	dropdown      string
+	youthDropdown string
 }
 
 type fussball struct {
 	app.Compo
-
-	article               [][]Content
-	article_without_chunk []Content
-	item                  Content
 }
 
 func (fn *fussballNavbar) Render() app.UI {
@@ -32,36 +29,64 @@ func (fn *fussballNavbar) Render() app.UI {
 		),
 		app.Div().Class("navbar-menu").ID("navbarMenu").Class(fn.active).Body(
 			app.Div().Class("navbar-start").Body(
-				app.Div().Class("navbar-item").Body(
-					app.A().Text(
-						"Fussball",
-					).Href("/fussball"),
+				app.A().Class("navbar-item").Href("/fussball").Text(
+					"Fussball",
 				),
-				app.Div().Class("navbar-item").Body(
-					app.A().Text(
-						"Mannschaft",
-					).Href("/article/12"),
+				app.A().Class("navbar-item").Href("/article/12").Text(
+					"Mannschaft",
 				),
-				app.Div().Class("navbar-item").Body(
-					app.A().Text(
-						"Ergebnisse und Tabellen",
-					).Href("/article/13"),
+				app.A().Class("navbar-item").Href("/article/13").Text(
+					"Ergebnisse und Tabellen",
 				),
-				app.Div().Class("navbar-item").Body(
-					app.A().Text(
-						"Kontakt",
-					).Href("/article/11"),
+				app.A().Class("navbar-item").Href("/article/11").Text(
+					"Kontakt",
 				),
-				// NACHWUCHS DROPDOWN
-				app.Div().Class("navbar-item").Body(
-					app.A().Text(
-						"Senioren",
-					).Href("/article/14"),
+				app.Div().Class("navbar-item has-dropdown").Class(fn.youthDropdown).Body(
+					app.Span().Class("navbar-link").Text(
+						"Nachwuchs",
+					).OnClick(fn.youthDropdownClick),
+					app.Div().Class("navbar-dropdown").Body(
+						app.A().Class("navbar-item").Href("/article/15").Text(
+							"SG",
+						),
+						app.A().Class("navbar-item").Href("/article/16").Text(
+							"U18",
+						),
+						app.A().Class("navbar-item").Href("/article/17").Text(
+							"U15-1",
+						),
+						app.A().Class("navbar-item").Href("/article/18").Text(
+							"U15-2",
+						),
+						app.A().Class("navbar-item").Href("/article/19").Text(
+							"U13-1",
+						),
+						app.A().Class("navbar-item").Href("/article/20").Text(
+							"U13-2",
+						),
+						app.A().Class("navbar-item").Href("/article/55").Text(
+							"U11-1",
+						),
+						app.A().Class("navbar-item").Href("/article/56").Text(
+							"U11-2",
+						),
+						app.A().Class("navbar-item").Href("/article/57").Text(
+							"U9",
+						),
+						app.A().Class("navbar-item").Href("/article/58").Text(
+							"U8",
+						),
+						app.A().Class("navbar-item").Href("/article/59").Text(
+							"U7",
+						),
+					),
 				),
-				app.Div().Class("navbar-item").Body(
-					app.A().Text(
-						"Chronik",
-					).Href("/article/72"),
+
+				app.A().Class("navbar-item").Href("/article/14").Text(
+					"Senioren",
+				),
+				app.A().Class("navbar-item").Href("/article/72").Text(
+					"Chronik",
 				),
 				app.Div().Class("navbar-item has-dropdown").Class(fn.dropdown).Body(
 					app.Span().Class("navbar-link").Text(
@@ -73,7 +98,7 @@ func (fn *fussballNavbar) Render() app.UI {
 						).Href("/fussball"),
 						app.A().Class("navbar-item").Text(
 							"Korbball",
-						).Href("/korbball"),
+						).Href("/article/24"),
 						app.A().Class("navbar-item").Text(
 							"Theater",
 						).Href("/article/42"),
@@ -133,11 +158,23 @@ func (fn *fussballNavbar) dropdownClick(ctx app.Context, e app.Event) {
 	}
 	fn.Update()
 }
+func (fn *fussballNavbar) youthDropdownClick(ctx app.Context, e app.Event) {
+	if fn.youthDropdown == "is-active" {
+		fn.youthDropdown = ""
+	} else {
+		fn.youthDropdown = "is-active"
+	}
+	fn.Update()
+}
 
 func (f *fussball) Render() app.UI {
 	return app.Div().Class("bg").Body(
 		&fussballNavbar{},
-		app.Section().Class("section is-medium").Body(),
+		app.Section().Class("section is-medium").Body(
+			app.Figure().Class("image").Body(
+				app.Img().Src("https://storage.googleapis.com/hambach/cid%3A9853829C-82D4-4179-B37D-76F376B0E4E6.jpeg"),
+			),
+		),
 		&footer{},
 	)
 }

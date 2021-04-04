@@ -19,15 +19,22 @@ type article struct {
 }
 
 func (a *article) Render() app.UI {
+
+	image := strings.Replace(a.item.Image, "public", "web", 1)
+	content := strings.ReplaceAll(a.item.Content, "/public", "")
+	content = strings.ReplaceAll(content, "/images/", "/web/images/")
+
+	navbar := getNavbar(a.item.Category)
 	return app.Div().Class("bg").Body(
-		&navbar{},
+		navbar,
 		app.Section().Class("section is-medium").Body(
 			app.Div().Class("card").Body(
 				app.Div().Class("card-content").Body(
+					app.Br(),
 					app.Div().Class("media").Body(
 						app.Div().Class("media-left").Body(
 							app.Figure().Class("image is-128x128").Body(
-								app.Img().Src(a.item.Image),
+								app.Img().Src(image),
 							),
 						),
 						app.Div().Class("media-content").Body(
@@ -36,13 +43,23 @@ func (a *article) Render() app.UI {
 						),
 					),
 					app.Div().Class("content").Body(
-						app.Raw(a.item.Content),
+						app.Raw("<div>"+content+"</div>"),
 					),
 				),
 			),
 		),
 		&footer{},
 	)
+}
+
+func getNavbar(category string) app.UI {
+	if category == "Fussball" {
+		return &fussballNavbar{}
+	}
+	if category == "Korbball" {
+		return &korbballNavbar{}
+	}
+	return &navbar{}
 }
 
 func (a *article) OnNav(ctx app.Context, u *url.URL) {

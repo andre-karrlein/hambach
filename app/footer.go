@@ -32,17 +32,27 @@ func (f *footer) Render() app.UI {
 				),
 				app.Div().Class("column").Body(
 					app.P().Class("matches").Text("SPONSORING"),
-					app.Figure().Class("image is-96x96").Body(
-						app.Img().Src("/web/images/sponsoring/atb.png"),
-					),
-					app.Figure().Class("image is-96x96").Body(
-						app.Img().Src("/web/images/sponsoring/pabst.jpg"),
-					),
-					app.Figure().Class("image is-96x96").Body(
-						app.Img().Src("/web/images/sponsoring/delphi.jpg"),
-					),
-					app.Figure().Class("image is-96x96").Body(
-						app.Img().Src("/web/images/sponsoring/tucher.png"),
+					app.Div().Class("columns").Body(
+						app.Div().Class("column").Body(
+							app.Figure().Class("image is-96x96").Body(
+								app.Img().Src("/web/images/sponsoring/atb.png"),
+							),
+						),
+						app.Div().Class("column").Body(
+							app.Figure().Class("image is-96x96").Body(
+								app.Img().Src("/web/images/sponsoring/pabst.jpg"),
+							),
+						),
+						app.Div().Class("column").Body(
+							app.Figure().Class("image is-96x96").Body(
+								app.Img().Src("/web/images/sponsoring/delphi.jpg"),
+							),
+						),
+						app.Div().Class("column").Body(
+							app.Figure().Class("image is-96x96").Body(
+								app.Img().Src("/web/images/sponsoring/tucher.png"),
+							),
+						),
 					),
 				),
 			),

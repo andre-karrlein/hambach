@@ -73,7 +73,7 @@ func (n *navbar) Render() app.UI {
 						).Href("/fussball"),
 						app.A().Class("navbar-item").Text(
 							"Korbball",
-						).Href("/korbball"),
+						).Href("/article/24"),
 						app.A().Class("navbar-item").Text(
 							"Theater",
 						).Href("/article/42"),
@@ -120,6 +120,12 @@ func (n *navbar) Render() app.UI {
 				),
 				app.A().Class("navbar-item").Href("/article/48").Text(
 					"Mitgliedschaft",
+				),
+				app.A().Class("navbar-item").Href("/article/101").Body(
+					app.Text("SPVGG als APP  "),
+					app.Span().Class("tag is-danger is-rounded").Text(
+						"NEW",
+					),
 				),
 			),
 		),
