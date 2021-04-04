@@ -50,7 +50,7 @@ func main() {
 	})
 	http.HandleFunc("/api/v1/articles", getArticles)
 
-	err := http.ListenAndServe(":8081", nil)
+	err := http.ListenAndServe(":8080", nil)
 	if err != nil {
 		log.Fatal(err)
 	}
