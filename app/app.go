@@ -122,7 +122,7 @@ func (n *navbar) Render() app.UI {
 					"Mitgliedschaft",
 				),
 				app.A().Class("navbar-item").Href("/article/101").Body(
-					app.Text("SPVGG als APP  "),
+					app.Text("SPVGG als APP"),
 					app.Span().Class("tag is-danger is-rounded").Text(
 						"NEW",
 					),
@@ -158,15 +158,30 @@ func (h *home) Render() app.UI {
 					return app.Div().Class("tile is-parent is-horizontal").Body(
 						app.Range(h.article[i]).Slice(func(j int) app.UI {
 							return app.Div().Class("tile is-parent is-3").Body(
-								app.A().Href("/article/" + strconv.Itoa(h.article[i][j].ID)).Body(
-									app.Div().Class("tile is-child card").Style("background-color", "#008000").Body(
-										app.Div().Class("card-image").Body(
-											app.Figure().Class("image").Body(
-												app.Img().Src(h.article[i][j].Image),
+								app.If(h.article[i][j].Link == "",
+									app.A().Href("/article/"+strconv.Itoa(h.article[i][j].ID)).Body(
+										app.Div().Class("tile is-child card").Style("background-color", "#008000").Body(
+											app.Div().Class("card-image").Body(
+												app.Figure().Class("image").Body(
+													app.Img().Src(h.article[i][j].Image),
+												),
+											),
+											app.Div().Class("card-content").Body(
+												app.P().Class("subtitle").Style("color", "white").Text(h.article[i][j].Title),
 											),
 										),
-										app.Div().Class("card-content").Body(
-											app.P().Class("subtitle").Style("color", "white").Text(h.article[i][j].Title),
+									),
+								).Else(
+									app.A().Href(h.article[i][j].Link).Body(
+										app.Div().Class("tile is-child card").Style("background-color", "#008000").Body(
+											app.Div().Class("card-image").Body(
+												app.Figure().Class("image").Body(
+													app.Img().Src(h.article[i][j].Image),
+												),
+											),
+											app.Div().Class("card-content").Body(
+												app.P().Class("subtitle").Style("color", "white").Text(h.article[i][j].Title),
+											),
 										),
 									),
 								),
