@@ -112,8 +112,8 @@ func (fn *fussballNavbar) Render() app.UI {
 							"Schach",
 						).Href("/article/38"),
 						app.A().Class("navbar-item").Text(
-							"FitMixx",
-						).Href("/article/37"),
+							"Kinderturnen",
+						).Href("/article/34"),
 						app.A().Class("navbar-item").Text(
 							"Gymnastik",
 						).Href("/article/33"),
