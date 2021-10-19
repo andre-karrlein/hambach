@@ -98,7 +98,7 @@ func (fn *fussballNavbar) Render() app.UI {
 						).Href("/fussball"),
 						app.A().Class("navbar-item").Text(
 							"Korbball",
-						).Href("/article/24"),
+						).Href("/article/22"),
 						app.A().Class("navbar-item").Text(
 							"Theater",
 						).Href("/article/42"),
@@ -115,23 +115,11 @@ func (fn *fussballNavbar) Render() app.UI {
 							"FitMixx",
 						).Href("/article/37"),
 						app.A().Class("navbar-item").Text(
-							"Pilates",
-						).Href("/article/36"),
-						app.A().Class("navbar-item").Text(
-							"Wirbelsäulengymnastik",
-						).Href("/article/35"),
-						app.A().Class("navbar-item").Text(
-							"Kinderturnen",
-						).Href("/article/34"),
-						app.A().Class("navbar-item").Text(
 							"Gymnastik",
 						).Href("/article/33"),
 						app.A().Class("navbar-item").Text(
 							"Freizetigruppe",
 						).Href("/article/32"),
-						app.A().Class("navbar-item").Text(
-							"Aqua-Fitness",
-						).Href("/article/40"),
 						app.A().Class("navbar-item").Text(
 							"Hallenbelegung",
 						).Href("/article/87"),

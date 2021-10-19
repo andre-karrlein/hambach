@@ -24,6 +24,10 @@ type article struct {
 	Link     string `json:"link"`
 }
 
+type metric struct {
+	Value int `firestore:"value,omitempty"`
+}
+
 // The main function is the entry of the server. It is where the HTTP handler
 // that serves the UI is defined and where the server is started.
 //
@@ -69,6 +73,8 @@ func getArticles(w http.ResponseWriter, r *http.Request) {
 			log.Fatal(err)
 		}
 
+		saveMetric("welcomepage.counter", 1)
+
 		w.Write(contentJSON)
 		return
 	}
@@ -80,6 +86,7 @@ func getArticles(w http.ResponseWriter, r *http.Request) {
 		log.Fatal(err)
 	}
 
+	saveMetric("article.counter", 1)
 	w.Write(articlesJSON)
 }
 
@@ -124,6 +131,34 @@ func loadArticle(id string) article {
 	result.DataTo(&a)
 
 	return a
+}
+
+func saveMetric(name string, value int) {
+	metric := metric{Value: loadMetric(name).Value + value}
+	ctx := context.Background()
+	client := createClient(ctx)
+	defer client.Close()
+
+	_, err := client.Collection("metrics").Doc(name).Set(ctx, metric)
+	if err != nil {
+		// Handle any errors in an appropriate way, such as returning them.
+		log.Printf("An error has occurred: %s", err)
+	}
+}
+
+func loadMetric(name string) metric {
+	ctx := context.Background()
+	client := createClient(ctx)
+	defer client.Close()
+
+	result, err := client.Collection("metrics").Doc(name).Get(ctx)
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+	var m metric
+	result.DataTo(&m)
+
+	return m
 }
 
 func createClient(ctx context.Context) *firestore.Client {
