@@ -13,11 +13,11 @@ func (f *footer) Render() app.UI {
 				app.Div().Class("column").Body(
 					app.P().Class("matches").Text("WEITERES"),
 					app.Br(),
-					app.A().Href("/article/6").Text("Sponsoren"),
+					app.A().Href("/6/article.html").Text("Sponsoren"),
 					app.Br(),
-					app.A().Href("/article/5").Text("Impressum"),
+					app.A().Href("/5/article.html").Text("Impressum"),
 					app.Br(),
-					app.A().Href("/article/4").Text("Datenschutz"),
+					app.A().Href("/4/article.html").Text("Datenschutz"),
 				),
 				app.Div().Class("column").Body(
 					app.P().Class("matches").Text("SOCIAL"),

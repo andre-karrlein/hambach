@@ -29,13 +29,13 @@ func (kn *korbballNavbar) Render() app.UI {
 		),
 		app.Div().Class("navbar-menu").ID("navbarMenu").Class(kn.active).Body(
 			app.Div().Class("navbar-start").Body(
-				app.A().Class("navbar-item").Href("/article/22").Text(
+				app.A().Class("navbar-item").Href("/22/article.html").Text(
 					"Kontakt",
 				),
-				app.A().Class("navbar-item").Href("/article/23").Text(
+				app.A().Class("navbar-item").Href("/23/article.html").Text(
 					"Chronik",
 				),
-				app.A().Class("navbar-item").Href("/article/24").Text(
+				app.A().Class("navbar-item").Href("/24/article.html").Text(
 					"Mannschaft I, II & III",
 				),
 				app.Div().Class("navbar-item has-dropdown").Class(kn.youthDropdown).Body(
@@ -43,16 +43,16 @@ func (kn *korbballNavbar) Render() app.UI {
 						"Nachwuchs",
 					).OnClick(kn.youthDropdownClick),
 					app.Div().Class("navbar-dropdown").Body(
-						app.A().Class("navbar-item").Href("/article/25").Text(
+						app.A().Class("navbar-item").Href("/25/article.html").Text(
 							"Jugend 19",
 						),
-						app.A().Class("navbar-item").Href("/article/26").Text(
+						app.A().Class("navbar-item").Href("/26/article.html").Text(
 							"Jugend 15",
 						),
-						app.A().Class("navbar-item").Href("/article/27").Text(
+						app.A().Class("navbar-item").Href("/27/article.html").Text(
 							"Jugend 12",
 						),
-						app.A().Class("navbar-item").Href("/article/28").Text(
+						app.A().Class("navbar-item").Href("/28/article.html").Text(
 							"Jugend 9",
 						),
 					),
@@ -64,34 +64,34 @@ func (kn *korbballNavbar) Render() app.UI {
 					app.Div().Class("navbar-dropdown").Body(
 						app.A().Class("navbar-item").Text(
 							"Fussball",
-						).Href("/fussball"),
+						).Href("/fussball.html"),
 						app.A().Class("navbar-item").Text(
 							"Korbball",
-						).Href("/article/22"),
+						).Href("/22/article.html"),
 						app.A().Class("navbar-item").Text(
 							"Theater",
-						).Href("/article/42"),
+						).Href("/42/article.html"),
 						app.A().Class("navbar-item").Text(
 							"Schützen",
-						).Href("/article/41"),
+						).Href("/41/article.html"),
 						app.A().Class("navbar-item").Text(
 							"Tischtennis",
-						).Href("/article/39"),
+						).Href("/39/article.html"),
 						app.A().Class("navbar-item").Text(
 							"Schach",
-						).Href("/article/38"),
+						).Href("/38/article.html"),
 						app.A().Class("navbar-item").Text(
 							"Kinderturnen",
-						).Href("/article/34"),
+						).Href("/34/article.html"),
 						app.A().Class("navbar-item").Text(
 							"Gymnastik",
-						).Href("/article/33"),
+						).Href("/33/article.html"),
 						app.A().Class("navbar-item").Text(
 							"Freizetigruppe",
-						).Href("/article/32"),
+						).Href("/32/article.html"),
 						app.A().Class("navbar-item").Text(
 							"Hallenbelegung",
-						).Href("/article/87"),
+						).Href("/87/article.html"),
 					),
 				),
 			),

@@ -26,10 +26,10 @@ func (n *navbar) Render() app.UI {
 		),
 		app.Div().Class("navbar-menu").ID("navbarMenu").Class(n.active).Body(
 			app.Div().Class("navbar-start").Body(
-				app.A().Class("navbar-item").Href("/article/47").Text(
+				app.A().Class("navbar-item").Href("/47/article.html").Text(
 					"Termine",
 				),
-				app.A().Class("navbar-item").Href("/sportheim").Text(
+				app.A().Class("navbar-item").Href("/sportheim.html").Text(
 					"Sportheim",
 				),
 				app.Div().Class("navbar-item has-dropdown").Class(n.dropdown).Body(
@@ -39,46 +39,46 @@ func (n *navbar) Render() app.UI {
 					app.Div().Class("navbar-dropdown").Body(
 						app.A().Class("navbar-item").Text(
 							"Fussball",
-						).Href("/fussball"),
+						).Href("/fussball.html"),
 						app.A().Class("navbar-item").Text(
 							"Korbball",
-						).Href("/article/22"),
+						).Href("/22/article.html"),
 						app.A().Class("navbar-item").Text(
 							"Theater",
-						).Href("/article/42"),
+						).Href("/42/article.html"),
 						app.A().Class("navbar-item").Text(
 							"Schützen",
-						).Href("/article/41"),
+						).Href("/41/article.html"),
 						app.A().Class("navbar-item").Text(
 							"Tischtennis",
-						).Href("/article/39"),
+						).Href("/39/article.html"),
 						app.A().Class("navbar-item").Text(
 							"Schach",
-						).Href("/article/38"),
+						).Href("/38/article.html"),
 						app.A().Class("navbar-item").Text(
 							"Kinderturnen",
-						).Href("/article/34"),
+						).Href("/34/article.html"),
 						app.A().Class("navbar-item").Text(
 							"Gymnastik",
-						).Href("/article/33"),
+						).Href("/33/article.html"),
 						app.A().Class("navbar-item").Text(
 							"Freizetigruppe",
-						).Href("/article/32"),
+						).Href("/32/article.html"),
 						app.A().Class("navbar-item").Text(
 							"Hallenbelegung",
-						).Href("/article/87"),
+						).Href("/87/article.html"),
 					),
 				),
-				app.A().Class("navbar-item").Href("/article/3").Text(
+				app.A().Class("navbar-item").Href("/3/article.html").Text(
 					"Vorstandschaft",
 				),
-				app.A().Class("navbar-item").Href("/article/2").Text(
+				app.A().Class("navbar-item").Href("/2/article.html").Text(
 					"Vereinschronik",
 				),
-				app.A().Class("navbar-item").Href("/article/48").Text(
+				app.A().Class("navbar-item").Href("/48/article.html").Text(
 					"Mitgliedschaft",
 				),
-				app.A().Class("navbar-item").Href("/article/101").Body(
+				app.A().Class("navbar-item").Href("/101/article.html").Body(
 					app.Text("SPVGG als APP"),
 					app.Span().Class("tag is-danger is-rounded").Text(
 						"NEW",

@@ -9,10 +9,10 @@ import (
 
 func main() {
 	app.Route("/", &home{})
-	app.RouteWithRegexp("^/article.*", &article{})
-	app.Route("/fussball", &fussball{})
-	app.Route("/korbball", &korbball{})
-	app.Route("/sportheim", &sportheim{})
+	app.RouteWithRegexp("/*/article.html", &article{})
+	app.Route("/fussball.html", &fussball{})
+	app.Route("/korbball.html", &korbball{})
+	app.Route("/sportheim.html", &sportheim{})
 	app.RunWhenOnBrowser()
 
 	err := app.GenerateStaticWebsite(".", &app.Handler{
