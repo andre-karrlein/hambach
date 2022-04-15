@@ -3,13 +3,11 @@ package main
 import (
 	"encoding/json"
 	"io/ioutil"
-	"log"
 	"net/http"
 	"net/url"
-	"strconv"
 	"strings"
 
-	"github.com/maxence-charriere/go-app/v7/pkg/app"
+	"github.com/maxence-charriere/go-app/v9/pkg/app"
 )
 
 type article struct {
@@ -62,48 +60,31 @@ func getNavbar(category string) app.UI {
 	return &navbar{}
 }
 
-func (a *article) OnNav(ctx app.Context, u *url.URL) {
+func (article *article) OnNav(ctx app.Context, u *url.URL) {
 	path := strings.Split(u.Path, "/")
 	id := path[2]
-	go a.doItemRequest(id)
-}
-
-func (a *article) doItemRequest(id string) {
-	resp, err := http.Get("/api/v1/articles?id=" + id)
-	if err != nil {
-		log.Println(err)
-		var contentList contentList
-		app.LocalStorage.Get("content", &contentList)
-
-		contentKey := 0
-		contentID, _ := strconv.Atoi(id)
-		for index, element := range contentList.Content {
-			if element.ID == contentID {
-				contentKey = index
-			}
+	// Launching a new goroutine:
+	ctx.Async(func() {
+		app_key := app.Getenv("READ_KEY")
+		r, err := http.Get("https://api.spvgg-hambach.de/api/v1/content/" + id + "?appkey=" + app_key)
+		if err != nil {
+			app.Log(err)
+			return
 		}
-		a.updateItemResponse(contentList.Content[contentKey])
-		return
-	}
-	defer resp.Body.Close()
+		defer r.Body.Close()
 
-	body, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		log.Println(err)
-		return
-	}
-	//Convert the body to type string
-	sb := string(body)
+		b, err := ioutil.ReadAll(r.Body)
+		if err != nil {
+			app.Log(err)
+			return
+		}
 
-	var content Content
-	json.Unmarshal([]byte(sb), &content)
+		sb := string(b)
 
-	a.updateItemResponse(content)
-}
+		var content Content
+		json.Unmarshal([]byte(sb), &content)
 
-func (a *article) updateItemResponse(content Content) {
-	app.Dispatch(func() {
-		a.item = content
-		a.Update()
+		article.item = content
+		article.Update()
 	})
 }

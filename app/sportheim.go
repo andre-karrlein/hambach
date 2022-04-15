@@ -3,12 +3,9 @@ package main
 import (
 	"encoding/json"
 	"io/ioutil"
-	"log"
 	"net/http"
-	"net/url"
-	"strconv"
 
-	"github.com/maxence-charriere/go-app/v7/pkg/app"
+	"github.com/maxence-charriere/go-app/v9/pkg/app"
 )
 
 type sportheim struct {
@@ -70,46 +67,29 @@ func (sp *sportheim) Render() app.UI {
 	)
 }
 
-func (sp *sportheim) OnNav(ctx app.Context, u *url.URL) {
-	go sp.doItemRequest()
-}
-
-func (sp *sportheim) doItemRequest() {
-	resp, err := http.Get("/api/v1/articles?id=1")
-	if err != nil {
-		log.Println(err)
-		var contentList contentList
-		app.LocalStorage.Get("content", &contentList)
-
-		contentKey := 0
-		contentID, _ := strconv.Atoi("1")
-		for index, element := range contentList.Content {
-			if element.ID == contentID {
-				contentKey = index
-			}
+func (sportheim *sportheim) OnNav(ctx app.Context) {
+	// Launching a new goroutine:
+	ctx.Async(func() {
+		app_key := app.Getenv("READ_KEY")
+		r, err := http.Get("https://api.spvgg-hambach.de/api/v1/content/1?appkey=" + app_key)
+		if err != nil {
+			app.Log(err)
+			return
 		}
-		sp.updateItemResponse(contentList.Content[contentKey])
-		return
-	}
-	defer resp.Body.Close()
+		defer r.Body.Close()
 
-	body, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		log.Println(err)
-		return
-	}
-	//Convert the body to type string
-	sb := string(body)
+		b, err := ioutil.ReadAll(r.Body)
+		if err != nil {
+			app.Log(err)
+			return
+		}
 
-	var content Content
-	json.Unmarshal([]byte(sb), &content)
+		sb := string(b)
 
-	sp.updateItemResponse(content)
-}
+		var content Content
+		json.Unmarshal([]byte(sb), &content)
 
-func (sp *sportheim) updateItemResponse(content Content) {
-	app.Dispatch(func() {
-		sp.item = content
-		sp.Update()
+		sportheim.item = content
+		sportheim.Update()
 	})
 }
