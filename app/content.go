@@ -1,7 +1,7 @@
 package main
 
 type Content struct {
-	ID       int    `json:"id"`
+	ID       string `json:"id"`
 	Title    string `json:"title"`
 	Date     string `json:"date"`
 	Category string `json:"category"`
