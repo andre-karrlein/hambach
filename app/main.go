@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+	"os"
 
 	"github.com/maxence-charriere/go-app/v9/pkg/app"
 )
@@ -29,6 +30,9 @@ func main() {
 			"/web/css/main.css",
 		},
 		ThemeColor: "#008000",
+		Env: app.Environment{
+			"READ_KEY": os.Getenv("READ_KEY"),
+		},
 	})
 
 	if err != nil {
