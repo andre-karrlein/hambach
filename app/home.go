@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"io/ioutil"
 	"net/http"
+	"sort"
 
 	"github.com/maxence-charriere/go-app/v9/pkg/app"
 )
@@ -130,6 +131,9 @@ func (home *home) OnNav(ctx app.Context) {
 			}
 		}
 
+		sort.Slice(content, func(i, j int) bool {
+			return content[i].ID < content[j].ID
+		})
 		home.article = chunkSlice(content, 4)
 		home.article_without_chunk = content
 
