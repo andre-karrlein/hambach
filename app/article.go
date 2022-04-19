@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"io/ioutil"
 	"net/http"
-	"net/url"
 	"strings"
 
 	"github.com/maxence-charriere/go-app/v9/pkg/app"
@@ -60,8 +59,8 @@ func getNavbar(category string) app.UI {
 	return &navbar{}
 }
 
-func (article *article) OnNav(ctx app.Context, u *url.URL) {
-	path := strings.Split(u.Path, "/")
+func (article *article) OnNav(ctx app.Context) {
+	path := strings.Split(ctx.Page().URL().Path, "/")
 	id := path[2]
 	// Launching a new goroutine:
 	ctx.Async(func() {
