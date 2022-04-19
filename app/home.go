@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"sort"
+	"strings"
 
 	"github.com/maxence-charriere/go-app/v9/pkg/app"
 )
@@ -24,13 +25,15 @@ func (h *home) Render() app.UI {
 				app.Range(h.article).Slice(func(i int) app.UI {
 					return app.Div().Class("tile is-parent is-horizontal").Body(
 						app.Range(h.article[i]).Slice(func(j int) app.UI {
+							image := strings.Replace(h.article[i][j].Image, "https://storage.googleapis.com/hambach/", "https://hambach.s3.eu-central-1.amazonaws.com/", 1)
+
 							return app.Div().Class("tile is-parent is-3").Body(
 								app.If(h.article[i][j].Link == "",
 									app.A().Href("/article/"+h.article[i][j].ID).Body(
 										app.Div().Class("tile is-child card").Style("background-color", "#008000").Body(
 											app.Div().Class("card-image").Body(
 												app.Figure().Class("image").Body(
-													app.Img().Src(h.article[i][j].Image),
+													app.Img().Src(image),
 												),
 											),
 											app.Div().Class("card-content").Body(
@@ -43,7 +46,7 @@ func (h *home) Render() app.UI {
 										app.Div().Class("tile is-child card").Style("background-color", "#008000").Body(
 											app.Div().Class("card-image").Body(
 												app.Figure().Class("image").Body(
-													app.Img().Src(h.article[i][j].Image),
+													app.Img().Src(image),
 												),
 											),
 											app.Div().Class("card-content").Body(
