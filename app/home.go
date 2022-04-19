@@ -26,6 +26,7 @@ func (h *home) Render() app.UI {
 					return app.Div().Class("tile is-parent is-horizontal").Body(
 						app.Range(h.article[i]).Slice(func(j int) app.UI {
 							image := strings.Replace(h.article[i][j].Image, "https://storage.googleapis.com/hambach/", "https://hambach.s3.eu-central-1.amazonaws.com/", 1)
+							link := strings.Replace(h.article[i][j].Link, "https://storage.googleapis.com/hambach/", "https://hambach.s3.eu-central-1.amazonaws.com/", 1)
 
 							return app.Div().Class("tile is-parent is-3").Body(
 								app.If(h.article[i][j].Link == "",
@@ -42,7 +43,7 @@ func (h *home) Render() app.UI {
 										),
 									),
 								).Else(
-									app.A().Href(h.article[i][j].Link).Body(
+									app.A().Href(link).Body(
 										app.Div().Class("tile is-child card").Style("background-color", "#008000").Body(
 											app.Div().Class("card-image").Body(
 												app.Figure().Class("image").Body(
