@@ -46,7 +46,7 @@ func (fn *fussballNavbar) Render() app.UI {
 						"Nachwuchs",
 					).OnClick(fn.youthDropdownClick),
 					app.Div().Class("navbar-dropdown").Body(
-						app.A().Class("navbar-item").Href("/15/article/15").Text(
+						app.A().Class("navbar-item").Href("/article/15").Text(
 							"SG",
 						),
 						app.A().Class("navbar-item").Href("/article/16").Text(
