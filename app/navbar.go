@@ -26,7 +26,7 @@ func (n *navbar) Render() app.UI {
 		),
 		app.Div().Class("navbar-menu").ID("navbarMenu").Class(n.active).Body(
 			app.Div().Class("navbar-start").Body(
-				app.A().Class("navbar-item").Href("/47/article.html").Text(
+				app.A().Class("navbar-item").Href("/article/47").Text(
 					"Termine",
 				),
 				app.A().Class("navbar-item").Href("/sportheim.html").Text(
@@ -69,16 +69,16 @@ func (n *navbar) Render() app.UI {
 						).Href("/article/87"),
 					),
 				),
-				app.A().Class("navbar-item").Href("/3/article.html").Text(
+				app.A().Class("navbar-item").Href("/article/3").Text(
 					"Vorstandschaft",
 				),
-				app.A().Class("navbar-item").Href("/2/article.html").Text(
+				app.A().Class("navbar-item").Href("/article/2").Text(
 					"Vereinschronik",
 				),
-				app.A().Class("navbar-item").Href("/48/article.html").Text(
+				app.A().Class("navbar-item").Href("/article/48").Text(
 					"Mitgliedschaft",
 				),
-				app.A().Class("navbar-item").Href("/101/article.html").Body(
+				app.A().Class("navbar-item").Href("/article/101").Body(
 					app.Text("SPVGG als APP"),
 					app.Span().Class("tag is-danger is-rounded").Text(
 						"NEW",

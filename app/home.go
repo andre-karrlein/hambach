@@ -26,7 +26,7 @@ func (h *home) Render() app.UI {
 						app.Range(h.article[i]).Slice(func(j int) app.UI {
 							return app.Div().Class("tile is-parent is-3").Body(
 								app.If(h.article[i][j].Link == "",
-									app.A().Href("/"+h.article[i][j].ID+"/article.html").Body(
+									app.A().Href("/article/"+h.article[i][j].ID).Body(
 										app.Div().Class("tile is-child card").Style("background-color", "#008000").Body(
 											app.Div().Class("card-image").Body(
 												app.Figure().Class("image").Body(
