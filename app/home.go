@@ -102,7 +102,7 @@ func chunksOfStrings(slice []string, chunkSize int) [][]string {
 	return chunks
 }
 
-func (home *home) OnNav(ctx app.Context) {
+func (home *home) OnMount(ctx app.Context) {
 	// Launching a new goroutine:
 	ctx.Async(func() {
 		app_key := app.Getenv("READ_KEY")

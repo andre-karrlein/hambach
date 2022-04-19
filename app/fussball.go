@@ -32,13 +32,13 @@ func (fn *fussballNavbar) Render() app.UI {
 				app.A().Class("navbar-item").Href("/fussball.html").Text(
 					"Fussball",
 				),
-				app.A().Class("navbar-item").Href("/12/article.html").Text(
+				app.A().Class("navbar-item").Href("/article/12").Text(
 					"Mannschaft",
 				),
-				app.A().Class("navbar-item").Href("/13/article.html").Text(
+				app.A().Class("navbar-item").Href("/article/13").Text(
 					"Ergebnisse und Tabellen",
 				),
-				app.A().Class("navbar-item").Href("/11/article.html").Text(
+				app.A().Class("navbar-item").Href("/article/11").Text(
 					"Kontakt",
 				),
 				app.Div().Class("navbar-item has-dropdown").Class(fn.youthDropdown).Body(
@@ -46,46 +46,46 @@ func (fn *fussballNavbar) Render() app.UI {
 						"Nachwuchs",
 					).OnClick(fn.youthDropdownClick),
 					app.Div().Class("navbar-dropdown").Body(
-						app.A().Class("navbar-item").Href("/15/article.html").Text(
+						app.A().Class("navbar-item").Href("/15/article/15").Text(
 							"SG",
 						),
-						app.A().Class("navbar-item").Href("/16/article.html").Text(
+						app.A().Class("navbar-item").Href("/article/16").Text(
 							"U18",
 						),
-						app.A().Class("navbar-item").Href("/17/article.html").Text(
+						app.A().Class("navbar-item").Href("/article/17").Text(
 							"U15-1",
 						),
-						app.A().Class("navbar-item").Href("/18/article.html").Text(
+						app.A().Class("navbar-item").Href("/article/18").Text(
 							"U15-2",
 						),
-						app.A().Class("navbar-item").Href("/19/article.html").Text(
+						app.A().Class("navbar-item").Href("/article/19").Text(
 							"U13-1",
 						),
-						app.A().Class("navbar-item").Href("/20/article.html").Text(
+						app.A().Class("navbar-item").Href("/article/20").Text(
 							"U13-2",
 						),
-						app.A().Class("navbar-item").Href("/55/article.html").Text(
+						app.A().Class("navbar-item").Href("/article/55").Text(
 							"U11-1",
 						),
-						app.A().Class("navbar-item").Href("/56/article.html").Text(
+						app.A().Class("navbar-item").Href("/article/56").Text(
 							"U11-2",
 						),
-						app.A().Class("navbar-item").Href("/57/article.html").Text(
+						app.A().Class("navbar-item").Href("/article/57").Text(
 							"U9",
 						),
-						app.A().Class("navbar-item").Href("/58/article.html").Text(
+						app.A().Class("navbar-item").Href("/article/58").Text(
 							"U8",
 						),
-						app.A().Class("navbar-item").Href("/59/article.html").Text(
+						app.A().Class("navbar-item").Href("/article/59").Text(
 							"U7",
 						),
 					),
 				),
 
-				app.A().Class("navbar-item").Href("/14/article.html").Text(
+				app.A().Class("navbar-item").Href("/article/14").Text(
 					"Senioren",
 				),
-				app.A().Class("navbar-item").Href("/72/article.html").Text(
+				app.A().Class("navbar-item").Href("/article/72").Text(
 					"Chronik",
 				),
 				app.Div().Class("navbar-item has-dropdown").Class(fn.dropdown).Body(
@@ -98,31 +98,31 @@ func (fn *fussballNavbar) Render() app.UI {
 						).Href("/fussball.html"),
 						app.A().Class("navbar-item").Text(
 							"Korbball",
-						).Href("/22/article.html"),
+						).Href("/article/22"),
 						app.A().Class("navbar-item").Text(
 							"Theater",
-						).Href("/42/article.html"),
+						).Href("/article/42"),
 						app.A().Class("navbar-item").Text(
 							"Schützen",
-						).Href("/41/article.html"),
+						).Href("/article/41"),
 						app.A().Class("navbar-item").Text(
 							"Tischtennis",
-						).Href("/39/article.html"),
+						).Href("/article/39"),
 						app.A().Class("navbar-item").Text(
 							"Schach",
-						).Href("/38/article.html"),
+						).Href("/article/38"),
 						app.A().Class("navbar-item").Text(
 							"Kinderturnen",
-						).Href("/34/article.html"),
+						).Href("/article/34"),
 						app.A().Class("navbar-item").Text(
 							"Gymnastik",
-						).Href("/33/article.html"),
+						).Href("/article/33"),
 						app.A().Class("navbar-item").Text(
 							"Freizetigruppe",
-						).Href("/32/article.html"),
+						).Href("/article/32"),
 						app.A().Class("navbar-item").Text(
 							"Hallenbelegung",
-						).Href("/87/article.html"),
+						).Href("/article/87"),
 					),
 				),
 			),

@@ -9,7 +9,7 @@ import (
 
 func main() {
 	app.Route("/", &home{})
-	app.RouteWithRegexp("/*/article.html", &article{})
+	app.RouteWithRegexp("^/article.*", &article{})
 	app.Route("/fussball.html", &fussball{})
 	app.Route("/korbball.html", &korbball{})
 	app.Route("/sportheim.html", &sportheim{})

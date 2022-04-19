@@ -60,7 +60,7 @@ func getNavbar(category string) app.UI {
 	return &navbar{}
 }
 
-func (article *article) OnNav(ctx app.Context, u *url.URL) {
+func (article *article) OnMount(ctx app.Context, u *url.URL) {
 	path := strings.Split(u.Path, "/")
 	id := path[2]
 	// Launching a new goroutine:

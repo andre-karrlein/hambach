@@ -42,31 +42,31 @@ func (n *navbar) Render() app.UI {
 						).Href("/fussball.html"),
 						app.A().Class("navbar-item").Text(
 							"Korbball",
-						).Href("/22/article.html"),
+						).Href("/article/22"),
 						app.A().Class("navbar-item").Text(
 							"Theater",
-						).Href("/42/article.html"),
+						).Href("/article/42"),
 						app.A().Class("navbar-item").Text(
 							"Schützen",
-						).Href("/41/article.html"),
+						).Href("/article/41"),
 						app.A().Class("navbar-item").Text(
 							"Tischtennis",
-						).Href("/39/article.html"),
+						).Href("/article/39"),
 						app.A().Class("navbar-item").Text(
 							"Schach",
-						).Href("/38/article.html"),
+						).Href("/article/38"),
 						app.A().Class("navbar-item").Text(
 							"Kinderturnen",
-						).Href("/34/article.html"),
+						).Href("/article/34"),
 						app.A().Class("navbar-item").Text(
 							"Gymnastik",
-						).Href("/33/article.html"),
+						).Href("/article/33"),
 						app.A().Class("navbar-item").Text(
 							"Freizetigruppe",
-						).Href("/32/article.html"),
+						).Href("/article/32"),
 						app.A().Class("navbar-item").Text(
 							"Hallenbelegung",
-						).Href("/87/article.html"),
+						).Href("/article/87"),
 					),
 				),
 				app.A().Class("navbar-item").Href("/3/article.html").Text(
