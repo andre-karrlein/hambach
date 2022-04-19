@@ -58,7 +58,7 @@ func (f *footer) Render() app.UI {
 			),
 			app.P().Body(
 				app.Text("Made by "),
-				app.A().Href("https://karrlein.com").Target("__blank").Text("André Karrlein"),
+				app.A().Href("https://www.karrlein.com").Target("__blank").Text("André Karrlein"),
 			),
 		),
 	)
