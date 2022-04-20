@@ -136,7 +136,9 @@ func (home *home) OnMount(ctx app.Context) {
 		}
 
 		sort.Slice(content, func(i, j int) bool {
-			return content[i].ID > content[j].ID
+			content_i, _ := strconv.Atoi(content[i].ID)
+			content_j, _ := strconv.Atoi(content[j].ID)
+			return content_i > content_j
 		})
 		home.article = chunkSlice(content, 4)
 		home.article_without_chunk = content
