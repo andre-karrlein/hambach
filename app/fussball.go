@@ -160,7 +160,7 @@ func (f *fussball) Render() app.UI {
 		&fussballNavbar{},
 		app.Section().Class("section is-medium").Body(
 			app.Figure().Class("image").Body(
-				app.Img().Src("https://hambach.s3.eu-central-1.amazonaws.com/cid%3A9853829C-82D4-4179-B37D-76F376B0E4E6.jpeg"),
+				app.Img().Src("https://hambach.s3.eu-central-1.amazonaws.com/2022-2023_Mannschaftsfoto_alle.jpg"),
 			),
 		),
 		&footer{},
