@@ -85,7 +85,7 @@ func (article *article) OnNav(ctx app.Context) {
 		var content Content
 		json.Unmarshal([]byte(sb), &content)
 
-		article.navabr = getNavbar(a.item.Category)
+		article.navbar = getNavbar(a.item.Category)
 		article.item = content
 		article.Update()
 	})
