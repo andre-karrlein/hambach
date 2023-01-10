@@ -5,7 +5,7 @@ import "github.com/maxence-charriere/go-app/v9/pkg/app"
 type fussballNavbar struct {
 	app.Compo
 
-	active        string
+	Active        string
 	dropdown      string
 	youthDropdown string
 }
@@ -21,13 +21,13 @@ func (fn *fussballNavbar) Render() app.UI {
 				app.Img().Src("/web/images/hambach_wappen.png"),
 				app.H3().Class("title title-brand").Text("SpVgg Hambach"),
 			),
-			app.Span().Class("navbar-burger").Class(fn.active).Body(
+			app.Span().Class("navbar-burger").Class(fn.Active).Body(
 				app.Span(),
 				app.Span(),
 				app.Span(),
 			).OnClick(fn.onClick),
 		),
-		app.Div().Class("navbar-menu").ID("navbarMenu").Class(fn.active).Body(
+		app.Div().Class("navbar-menu").ID("navbarMenu").Class(fn.Active).Body(
 			app.Div().Class("navbar-start").Body(
 				app.A().Class("navbar-item").Href("/fussball.html").Text(
 					"Fussball",
@@ -131,10 +131,10 @@ func (fn *fussballNavbar) Render() app.UI {
 }
 
 func (fn *fussballNavbar) onClick(ctx app.Context, e app.Event) {
-	if fn.active == "is-active" {
-		fn.active = ""
+	if fn.Active == "is-active" {
+		fn.Active = ""
 	} else {
-		fn.active = "is-active"
+		fn.Active = "is-active"
 	}
 	fn.Update()
 }

@@ -7,7 +7,7 @@ import (
 type navbar struct {
 	app.Compo
 
-	active   string
+	Active   string
 	dropdown string
 }
 
@@ -18,13 +18,13 @@ func (n *navbar) Render() app.UI {
 				app.Img().Src("/web/images/hambach_wappen.png"),
 				app.H3().Class("title title-brand").Text("SpVgg Hambach"),
 			),
-			app.Span().Class("navbar-burger").Class(n.active).Body(
+			app.Span().Class("navbar-burger").Class(n.Active).Body(
 				app.Span(),
 				app.Span(),
 				app.Span(),
 			).OnClick(n.onClick),
 		),
-		app.Div().Class("navbar-menu").ID("navbarMenu").Class(n.active).Body(
+		app.Div().Class("navbar-menu").ID("navbarMenu").Class(n.Active).Body(
 			app.Div().Class("navbar-start").Body(
 				app.A().Class("navbar-item").Href("/article/47").Text(
 					"Termine",
@@ -90,10 +90,10 @@ func (n *navbar) Render() app.UI {
 }
 
 func (n *navbar) onClick(ctx app.Context, e app.Event) {
-	if n.active == "is-active" {
-		n.active = ""
+	if A.active == "is-active" {
+		A.active = ""
 	} else {
-		n.active = "is-active"
+		A.active = "is-active"
 	}
 	n.Update()
 }
