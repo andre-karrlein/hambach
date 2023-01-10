@@ -88,5 +88,6 @@ func (article *article) OnNav(ctx app.Context) {
 		article.navbar = getNavbar(content.Category)
 		article.item = content
 		article.Update()
+		ctx.Reload()
 	})
 }
