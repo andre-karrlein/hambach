@@ -5,7 +5,7 @@ import "github.com/maxence-charriere/go-app/v9/pkg/app"
 type korbballNavbar struct {
 	app.Compo
 
-	Active        string
+	active        string
 	dropdown      string
 	youthDropdown string
 }
@@ -21,13 +21,13 @@ func (kn *korbballNavbar) Render() app.UI {
 				app.Img().Src("/web/images/hambach_wappen.png"),
 				app.H3().Class("title title-brand").Text("SpVgg Hambach"),
 			),
-			app.Span().Class("navbar-burger").Class(kn.Active).Body(
+			app.Span().Class("navbar-burger").Class(kn.active).Body(
 				app.Span(),
 				app.Span(),
 				app.Span(),
 			).OnClick(kn.onClick),
 		),
-		app.Div().Class("navbar-menu").ID("navbarMenu").Class(kn.Active).Body(
+		app.Div().Class("navbar-menu").ID("navbarMenu").Class(kn.active).Body(
 			app.Div().Class("navbar-start").Body(
 				app.A().Class("navbar-item").Href("/article/22").Text(
 					"Kontakt",
@@ -100,10 +100,10 @@ func (kn *korbballNavbar) Render() app.UI {
 }
 
 func (kn *korbballNavbar) onClick(ctx app.Context, e app.Event) {
-	if kn.Active == "is-active" {
-		kn.Active = ""
+	if kn.active == "is-active" {
+		kn.active = ""
 	} else {
-		kn.Active = "is-active"
+		kn.active = "is-active"
 	}
 	kn.Update()
 }

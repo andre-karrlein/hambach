@@ -53,10 +53,10 @@ func (a *article) Render() app.UI {
 
 func getNavbar(category string) app.UI {
 	if category == "Fussball" {
-		return &fussballNavbar{Active: ""}
+		return &fussballNavbar{}
 	}
 	if category == "Korbball" {
-		return &korbballNavbar{Active: ""}
+		return &korbballNavbar{}
 	}
 	return &navbar{}
 }
