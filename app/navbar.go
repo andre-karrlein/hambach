@@ -90,10 +90,10 @@ func (n *navbar) Render() app.UI {
 }
 
 func (n *navbar) onClick(ctx app.Context, e app.Event) {
-	if A.active == "is-active" {
-		A.active = ""
+	if n.Active == "is-active" {
+		n.Active = ""
 	} else {
-		A.active = "is-active"
+		n.Active = "is-active"
 	}
 	n.Update()
 }
