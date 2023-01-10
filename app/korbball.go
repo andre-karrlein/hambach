@@ -41,7 +41,7 @@ func (kn *korbballNavbar) Render() app.UI {
 				app.Div().Class("navbar-item has-dropdown").Class(kn.youthDropdown).Body(
 					app.Span().Class("navbar-link").Text(
 						"Nachwuchs",
-					).OnClick(kn.youthDropdownClick),
+					),
 					app.Div().Class("navbar-dropdown").Body(
 						app.A().Class("navbar-item").Href("/article/25").Text(
 							"Jugend 19",
@@ -56,11 +56,11 @@ func (kn *korbballNavbar) Render() app.UI {
 							"Jugend 9",
 						),
 					),
-				),
+				).OnClick(kn.youthDropdownClick),
 				app.Div().Class("navbar-item has-dropdown").Class(kn.dropdown).Body(
 					app.Span().Class("navbar-link").Text(
 						"Abteilungen",
-					).OnClick(kn.dropdownClick),
+					),
 					app.Div().Class("navbar-dropdown").Body(
 						app.A().Class("navbar-item").Text(
 							"Fussball",
@@ -93,9 +93,9 @@ func (kn *korbballNavbar) Render() app.UI {
 							"Hallenbelegung",
 						).Href("/article/87"),
 					),
-				),
+				).OnClick(kn.dropdownClick),
 			),
-		),
+		).OnClick(kn.onClick),
 	)
 }
 
