@@ -44,7 +44,7 @@ func (fn *fussballNavbar) Render() app.UI {
 				app.Div().Class("navbar-item has-dropdown").Class(fn.youthDropdown).Body(
 					app.Span().Class("navbar-link").Text(
 						"Nachwuchs",
-					).OnClick(fn.youthDropdownClick),
+					),
 					app.Div().Class("navbar-dropdown").Body(
 						app.A().Class("navbar-item").Href("/article/15").Text(
 							"SG",
@@ -80,7 +80,7 @@ func (fn *fussballNavbar) Render() app.UI {
 							"U7",
 						),
 					),
-				),
+				).OnClick(fn.youthDropdownClick),
 
 				app.A().Class("navbar-item").Href("/article/14").Text(
 					"Senioren",
@@ -91,7 +91,7 @@ func (fn *fussballNavbar) Render() app.UI {
 				app.Div().Class("navbar-item has-dropdown").Class(fn.dropdown).Body(
 					app.Span().Class("navbar-link").Text(
 						"Abteilungen",
-					).OnClick(fn.dropdownClick),
+					),
 					app.Div().Class("navbar-dropdown").Body(
 						app.A().Class("navbar-item").Text(
 							"Fussball",
@@ -124,9 +124,9 @@ func (fn *fussballNavbar) Render() app.UI {
 							"Hallenbelegung",
 						).Href("/article/87"),
 					),
-				),
+				).OnClick(fn.dropdownClick),
 			),
-		),
+		).OnClick(fn.onClick),
 	)
 }
 

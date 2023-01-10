@@ -35,7 +35,7 @@ func (n *navbar) Render() app.UI {
 				app.Div().Class("navbar-item has-dropdown").Class(n.dropdown).Body(
 					app.Span().Class("navbar-link").Text(
 						"Abteilungen",
-					).OnClick(n.dropdownClick),
+					),
 					app.Div().Class("navbar-dropdown").Body(
 						app.A().Class("navbar-item").Text(
 							"Fussball",
@@ -68,7 +68,7 @@ func (n *navbar) Render() app.UI {
 							"Hallenbelegung",
 						).Href("/article/87"),
 					),
-				),
+				).OnClick(n.dropdownClick),
 				app.A().Class("navbar-item").Href("/article/3").Text(
 					"Vorstandschaft",
 				),
@@ -85,7 +85,7 @@ func (n *navbar) Render() app.UI {
 					),
 				),
 			),
-		),
+		).OnClick(n.onClick),
 	)
 }
 
