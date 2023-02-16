@@ -21,4 +21,5 @@
 }
 .content-size {
     font-size: 1.7vw;
+    text-overflow: ellipsis;
 }
