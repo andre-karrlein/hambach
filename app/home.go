@@ -23,10 +23,10 @@ func (h *home) Render() app.UI {
 		&navbar{},
 		app.Section().Class("section is-medium").Body(
 			app.Div().Class("columns is-multiline is-mobile").Body(
-				app.Range(h.article_without_chunk).Slice(func(i int) app.UI {
+				app.Range(h.article).Slice(func(i int) app.UI {
 					image := strings.Replace(h.article_without_chunk[i].Image, "https://storage.googleapis.com/hambach/", "https://hambach.s3.eu-central-1.amazonaws.com/", 1)
 					link := strings.Replace(h.article_without_chunk[i].Link, "https://storage.googleapis.com/hambach/", "https://hambach.s3.eu-central-1.amazonaws.com/", 1)
-				
+			
 					return app.Div().Class("column").Body(
 						app.If(h.article_without_chunk[i].Link == "",
 							app.A().Href("/article/"+h.article_without_chunk[i].ID).Body(
@@ -55,7 +55,7 @@ func (h *home) Render() app.UI {
 								),
 							),
 						),
-					),
+					)
 				}),
 			),
 		),
