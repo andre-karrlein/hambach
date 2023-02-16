@@ -12,10 +12,6 @@
 .is-success {
     background-color: #008000 !important;
 }
-.column.equal-height {
-    display: inline-flex; 
-}
-
-.column.equal-height > div {
-    width: 100%;
+.equal-height {
+    height: 100%;
 }
