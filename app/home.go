@@ -22,12 +22,12 @@ func (h *home) Render() app.UI {
 	return app.Div().Class("bg").Body(
 		&navbar{},
 		app.Section().Class("section is-medium").Body(
-			app.Div().Class("columns is-multiline is-mobile").Body(
+			app.Div().Class("columns is-multiline").Body(
 				app.Range(h.article_without_chunk).Slice(func(i int) app.UI {
 					image := strings.Replace(h.article_without_chunk[i].Image, "https://storage.googleapis.com/hambach/", "https://hambach.s3.eu-central-1.amazonaws.com/", 1)
 					link := strings.Replace(h.article_without_chunk[i].Link, "https://storage.googleapis.com/hambach/", "https://hambach.s3.eu-central-1.amazonaws.com/", 1)
 			
-					return app.Div().Class("column is-one-quarter").Body(
+					return app.Div().Class("column equal-height").Body(
 						app.If(h.article_without_chunk[i].Link == "",
 							app.A().Href("/article/"+h.article_without_chunk[i].ID).Body(
 								app.Div().Class("card").Style("background-color", "#008000").Body(
