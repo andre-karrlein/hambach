@@ -27,7 +27,7 @@ func (h *home) Render() app.UI {
 					image := strings.Replace(h.article_without_chunk[i].Image, "https://storage.googleapis.com/hambach/", "https://hambach.s3.eu-central-1.amazonaws.com/", 1)
 					link := strings.Replace(h.article_without_chunk[i].Link, "https://storage.googleapis.com/hambach/", "https://hambach.s3.eu-central-1.amazonaws.com/", 1)
 				
-					app.Div().Class("column").Body(
+					return app.Div().Class("column").Body(
 						app.If(h.article_without_chunk[i].Link == "",
 							app.A().Href("/article/"+h.article_without_chunk[i].ID).Body(
 								app.Div().Class("tile is-child card").Style("background-color", "#008000").Body(
@@ -56,11 +56,11 @@ func (h *home) Render() app.UI {
 							),
 						),
 					),
-				}
+				}),
 			),
 		),
-	),
-	&footer{},
+		&footer{},
+	)
 }
 
 
