@@ -37,7 +37,7 @@ func (h *home) Render() app.UI {
 										),
 									),
 									app.Div().Class("card-content").Body(
-										app.P().Class("subtitle").Style("color", "white").Text(h.article_without_chunk[i].Title),
+										app.P().Class("subtitle content-size").Style("color", "white").Text(h.article_without_chunk[i].Title),
 									),
 								),
 							),
@@ -50,7 +50,7 @@ func (h *home) Render() app.UI {
 										),
 									),
 									app.Div().Class("card-content").Body(
-										app.P().Class("subtitle").Style("color", "white").Text(h.article_without_chunk[i].Title),
+										app.P().Class("subtitle content-size").Style("color", "white").Text(h.article_without_chunk[i].Title),
 									),
 								),
 							),

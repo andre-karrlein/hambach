@@ -19,3 +19,6 @@
     height: 60%;
     overflow: hidden;
 }
+.content-size {
+    font-size: 3.5vw;
+}
