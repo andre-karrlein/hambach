@@ -24,7 +24,7 @@ func main() {
 				Large:      "/web/images/hambach_logo_512.png",
 				AppleTouch: "/web/images/hambach_logo_192.png", // Specify icon on IOS devices.
 			},
-			Resources: app.GitHubPages("hambach")
+			Resources: app.GitHubPages("hambach"),
 			Styles: []string{
 				"https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css",
 				"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css",
