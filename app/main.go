@@ -14,8 +14,10 @@ func main() {
 	app.Route("/korbball.html", &korbball{})
 	app.Route("/sportheim.html", &sportheim{})
 	app.RunWhenOnBrowser()
+	err := nil
+
 	if os.Getenv("GITHUB") == "TRUE" {
-		err := app.GenerateStaticWebsite(".", &app.Handler{
+		err = app.GenerateStaticWebsite(".", &app.Handler{
 			Name:        "SpVgg Hambach",
 			Title:       "SpVgg Hambach",
 			Description: "Webiste of SpVgg Hambach",
@@ -36,12 +38,8 @@ func main() {
 				"READ_KEY": os.Getenv("READ_KEY"),
 			},
 		})
-
-		if err != nil {
-			log.Fatal(err)
-		}
 	} else {
-		err := app.GenerateStaticWebsite(".", &app.Handler{
+		err = app.GenerateStaticWebsite(".", &app.Handler{
 			Name:        "SpVgg Hambach",
 			Title:       "SpVgg Hambach",
 			Description: "Webiste of SpVgg Hambach",
@@ -60,9 +58,9 @@ func main() {
 				"READ_KEY": os.Getenv("READ_KEY"),
 			},
 		})
+	}
 
-		if err != nil {
-			log.Fatal(err)
-		}
+	if err != nil {
+		log.Fatal(err)
 	}
 }

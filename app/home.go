@@ -34,7 +34,7 @@ func (h *home) Render() app.UI {
 									app.A().Href("/article/"+h.article[i][j].ID).Body(
 										app.Div().Class("tile is-child card").Style("background-color", "#008000").Body(
 											app.Div().Class("card-image").Body(
-												app.Figure().Class("image").Body(
+												app.Figure().Class("image is-4by3").Body(
 													app.Img().Src(image),
 												),
 											),
@@ -47,7 +47,7 @@ func (h *home) Render() app.UI {
 									app.A().Href(link).Body(
 										app.Div().Class("tile is-child card").Style("background-color", "#008000").Body(
 											app.Div().Class("card-image").Body(
-												app.Figure().Class("image").Body(
+												app.Figure().Class("image  is-4by3").Body(
 													app.Img().Src(image),
 												),
 											),
