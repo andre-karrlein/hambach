@@ -37,18 +37,18 @@ jobs:
           go-version: '^1.17'
 
       - name: Build wasm file
-        run: GOARCH=wasm GOOS=js go build -o docs/web/app.wasm ./app
+        run: GOARCH=wasm GOOS=js go build -o build/web/app.wasm ./app
 
       - name: Build app file
-        run: go build -o docs/app ./app
+        run: go build -o build/app ./app
 
       - name: Generate Website
-        run: cd docs && export READ_KEY=${{ secrets.READ_KEY }} && ./app && rm ./app
+        run: cd build && export READ_KEY=${{ secrets.READ_KEY }} && export GITHUB=TRUE && ./app && rm ./app
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
           # Upload entire repository
-          path: 'docs'
+          path: 'build'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v1
