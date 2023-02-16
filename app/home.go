@@ -144,6 +144,7 @@ func (home *home) OnMount(ctx app.Context) {
 		home.article = chunkSlice(content, 4)
 		home.article_without_chunk = content
 
+		app.Log(content)
 		home.Update()
 	})
 }
