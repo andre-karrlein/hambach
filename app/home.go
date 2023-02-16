@@ -56,10 +56,11 @@ func (h *home) Render() app.UI {
 							),
 						),
 					),
+				}
 			),
 		),
-		&footer{},
-	)
+	),
+	&footer{},
 }
 
 
