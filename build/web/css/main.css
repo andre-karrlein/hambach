@@ -20,5 +20,5 @@
     overflow: hidden;
 }
 .content-size {
-    font-size: 1.5vw;
+    font-size: calc(15px + .3vw)
 }
