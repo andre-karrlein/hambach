@@ -27,10 +27,10 @@ func (h *home) Render() app.UI {
 					image := strings.Replace(h.article_without_chunk[i].Image, "https://storage.googleapis.com/hambach/", "https://hambach.s3.eu-central-1.amazonaws.com/", 1)
 					link := strings.Replace(h.article_without_chunk[i].Link, "https://storage.googleapis.com/hambach/", "https://hambach.s3.eu-central-1.amazonaws.com/", 1)
 			
-					return app.Div().Class("column").Body(
+					return app.Div().Class("column is-one-quarter").Body(
 						app.If(h.article_without_chunk[i].Link == "",
 							app.A().Href("/article/"+h.article_without_chunk[i].ID).Body(
-								app.Div().Class("tile is-child card").Style("background-color", "#008000").Body(
+								app.Div().Class("card").Style("background-color", "#008000").Body(
 									app.Div().Class("card-image").Body(
 										app.Figure().Class("image").Body(
 											app.Img().Src(image),
@@ -43,7 +43,7 @@ func (h *home) Render() app.UI {
 							),
 						).Else(
 							app.A().Href(link).Body(
-								app.Div().Class("tile is-child card").Style("background-color", "#008000").Body(
+								app.Div().Class("card").Style("background-color", "#008000").Body(
 									app.Div().Class("card-image").Body(
 										app.Figure().Class("image").Body(
 											app.Img().Src(image),
