@@ -29,7 +29,7 @@ func main() {
 				"https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css",
 				"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css",
 				"/web/css/main.css",
-				"/web/css/background-test.css"
+				"/web/css/background-test.css",
 			},
 			ThemeColor: "#008000",
 			Env: app.Environment{
