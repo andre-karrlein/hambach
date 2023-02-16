@@ -31,7 +31,7 @@ func (h *home) Render() app.UI {
 						app.If(h.article_without_chunk[i].Link == "",
 							app.A().Href("/article/"+h.article_without_chunk[i].ID).Body(
 								app.Div().Class("card equal-height").Style("background-color", "#008000").Body(
-									app.Div().Class("card-image").Style("height: 50%; overflow: hidden;").Body(
+									app.Div().Class("card-image card-image-half").Body(
 										app.Figure().Class("image").Body(
 											app.Img().Src(image),
 										),
@@ -44,7 +44,7 @@ func (h *home) Render() app.UI {
 						).Else(
 							app.A().Href(link).Body(
 								app.Div().Class("card equal-height").Style("background-color", "#008000").Body(
-									app.Div().Class("card-image").Style("height: 50%; overflow: hidden;").Body(
+									app.Div().Class("card-image card-image-half").Body(
 										app.Figure().Class("image").Body(
 											app.Img().Src(image),
 										),

@@ -15,3 +15,7 @@
 .equal-height {
     height: 100%;
 }
+.card-image-half {
+    height: 50%;
+    overflow: hidden;
+}
