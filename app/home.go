@@ -22,50 +22,48 @@ func (h *home) Render() app.UI {
 	return app.Div().Class("bg").Body(
 		&navbar{},
 		app.Section().Class("section is-medium").Body(
-			app.Div().Class("tile is-ancestor is-vertical").Body(
-				app.Range(h.article).Slice(func(i int) app.UI {
-					return app.Div().Class("tile is-parent is-horizontal").Body(
-						app.Range(h.article[i]).Slice(func(j int) app.UI {
-							image := strings.Replace(h.article[i][j].Image, "https://storage.googleapis.com/hambach/", "https://hambach.s3.eu-central-1.amazonaws.com/", 1)
-							link := strings.Replace(h.article[i][j].Link, "https://storage.googleapis.com/hambach/", "https://hambach.s3.eu-central-1.amazonaws.com/", 1)
-
-							return app.Div().Class("tile is-parent is-3").Body(
-								app.If(h.article[i][j].Link == "",
-									app.A().Href("/article/"+h.article[i][j].ID).Body(
-										app.Div().Class("tile is-child card").Style("background-color", "#008000").Body(
-											app.Div().Class("card-image").Body(
-												app.Figure().Class("image is-4by3").Body(
-													app.Img().Src(image),
-												),
-											),
-											app.Div().Class("card-content").Body(
-												app.P().Class("subtitle").Style("color", "white").Text(h.article[i][j].Title),
-											),
+			app.Div().Class("columns is-multiline is-mobile").Body(
+				app.Range(h.article_without_chunk).Slice(func(i int) app.UI {
+					app.Div().Class("column").Body(
+						image := strings.Replace(h.article_without_chunk[i].Image, "https://storage.googleapis.com/hambach/", "https://hambach.s3.eu-central-1.amazonaws.com/", 1)
+						link := strings.Replace(h.article_without_chunk[i].Link, "https://storage.googleapis.com/hambach/", "https://hambach.s3.eu-central-1.amazonaws.com/", 1)
+						app.If(h.article_without_chunk[i].Link == "",
+							app.A().Href("/article/"+h.article_without_chunk[i].ID).Body(
+								app.Div().Class("tile is-child card").Style("background-color", "#008000").Body(
+									app.Div().Class("card-image").Body(
+										app.Figure().Class("image").Body(
+											app.Img().Src(image),
 										),
 									),
-								).Else(
-									app.A().Href(link).Body(
-										app.Div().Class("tile is-child card").Style("background-color", "#008000").Body(
-											app.Div().Class("card-image").Body(
-												app.Figure().Class("image  is-4by3").Body(
-													app.Img().Src(image),
-												),
-											),
-											app.Div().Class("card-content").Body(
-												app.P().Class("subtitle").Style("color", "white").Text(h.article[i][j].Title),
-											),
-										),
+									app.Div().Class("card-content").Body(
+										app.P().Class("subtitle").Style("color", "white").Text(h.article_without_chunk[i].Title),
 									),
 								),
-							)
-						}),
-					)
-				}),
+							),
+						).Else(
+							app.A().Href(link).Body(
+								app.Div().Class("tile is-child card").Style("background-color", "#008000").Body(
+									app.Div().Class("card-image").Body(
+										app.Figure().Class("image").Body(
+											app.Img().Src(image),
+										),
+									),
+									app.Div().Class("card-content").Body(
+										app.P().Class("subtitle").Style("color", "white").Text(h.article_without_chunk[i].Title),
+									),
+								),
+							),
+						),
+					),
 			),
 		),
 		&footer{},
 	)
 }
+
+
+
+
 
 func chunkSlice(slice []Content, chunkSize int) [][]Content {
 	var chunks [][]Content
