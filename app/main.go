@@ -13,6 +13,7 @@ func main() {
 	app.Route("/fussball.html", &fussball{})
 	app.Route("/korbball.html", &korbball{})
 	app.Route("/sportheim.html", &sportheim{})
+	app.Route("/news.html", &news{})
 	app.RunWhenOnBrowser()
 
 	if os.Getenv("GITHUB") == "TRUE" {
