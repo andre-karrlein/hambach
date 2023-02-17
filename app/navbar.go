@@ -26,6 +26,9 @@ func (n *navbar) Render() app.UI {
 		),
 		app.Div().Class("navbar-menu").ID("navbarMenu").Class(n.active).Body(
 			app.Div().Class("navbar-start").Body(
+				app.A().Class("navbar-item").Href("/news.html").Text(
+					"News",
+				),
 				app.A().Class("navbar-item").Href("/article/47").Text(
 					"Termine",
 				),

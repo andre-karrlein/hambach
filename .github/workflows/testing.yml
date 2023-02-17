@@ -1,5 +1,5 @@
 # Simple workflow for deploying static content to GitHub Pages
-name: Deploy static content to Pages
+name: Deploy test to Pages
 
 on:
   # Runs on pushes targeting the default branch
@@ -43,12 +43,12 @@ jobs:
         run: go build -o build/app ./app
 
       - name: Generate Website
-        run: cd build && export READ_KEY=${{ secrets.READ_KEY }} && ./app && rm ./app
+        run: cd build && export READ_KEY=${{ secrets.READ_KEY }} && export GITHUB=TRUE && ./app && rm ./app
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
           # Upload entire repository
-          path: '.'
+          path: 'build'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v1

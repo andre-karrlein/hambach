@@ -11,13 +11,13 @@ import (
 	"github.com/maxence-charriere/go-app/v9/pkg/app"
 )
 
-type home struct {
+type news struct {
 	app.Compo
 
 	article []Content
 }
 
-func (h *home) Render() app.UI {
+func (h *news) Render() app.UI {
 	return app.Div().Class("bg").Body(
 		&navbar{},
 		app.Section().Class("section is-medium").Body(
@@ -62,7 +62,7 @@ func (h *home) Render() app.UI {
 	)
 }
 
-func (home *home) OnMount(ctx app.Context) {
+func (news *news) OnMount(ctx app.Context) {
 	// Launching a new goroutine:
 	ctx.Async(func() {
 		app_key := app.Getenv("READ_KEY")
@@ -86,7 +86,7 @@ func (home *home) OnMount(ctx app.Context) {
 
 		var content []Content
 		for _, element := range result {
-			if element.Type == "article" && element.Category == "Allgemein" {
+			if element.Type == "article" {
 				content = append(content, element)
 			}
 		}
@@ -96,9 +96,9 @@ func (home *home) OnMount(ctx app.Context) {
 			content_j, _ := strconv.Atoi(content[j].ID)
 			return content_i > content_j
 		})
-		home.article = content
+		news.article = content
 
 		app.Log(content)
-		home.Update()
+		news.Update()
 	})
 }

@@ -12,3 +12,13 @@
 .is-success {
     background-color: #008000 !important;
 }
+.equal-height {
+    height: 300px;
+}
+.card-image-half {
+    height: 60%;
+    overflow: hidden;
+}
+.content-size {
+    font-size: calc(15px + .2vw)
+}
