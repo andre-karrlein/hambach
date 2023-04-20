@@ -90,11 +90,11 @@ func (home *home) OnMount(ctx app.Context) {
 
 		sort.Slice(article, func(i, j int) bool {
 			dateString := "2006-01-02"
-			date1, error1 := time.Parse(strings.TrimSpace(article[i].Date), dateString)
+			date1, error1 := time.Parse(dateString, strings.TrimSpace(article[i].Date))
 			if error1 != nil {
     				app.Log(error1)
 			}
-			date2, error2 := time.Parse(strings.TrimSpace(article[j].Date), dateString)
+			date2, error2 := time.Parse(dateString, strings.TrimSpace(article[j].Date))
 			if error2 != nil {
     				app.Log(error2)
 			}
