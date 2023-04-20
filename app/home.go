@@ -88,9 +88,7 @@ func (home *home) OnMount(ctx app.Context) {
 		}
 
 		sort.Slice(article, func(i, j int) bool {
-			dateString := "2021-11-22"
-			app.Log(article[i].Date)
-			app.Log(article[j].Date)
+			dateString := "2006-01-02"
 			date1, _ := time.Parse(article[i].Date, dateString)
 			date2, _ := time.Parse(article[j].Date, dateString)
 			app.Log(date1)
