@@ -66,7 +66,7 @@ func getNavbar(category string) app.UI {
 func (article *article) OnNav(ctx app.Context) {
 	path := strings.Split(ctx.Page().URL().Path, "/")
 	id := path[2]
-	id_int := strconv.Atoi(id)
+	id_int, _ := strconv.Atoi(id)
 
 	if (id_int > 0 && id_int < 121) {
 		// Launching a new goroutine:

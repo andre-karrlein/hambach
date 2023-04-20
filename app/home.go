@@ -5,7 +5,6 @@ import (
 	"io/ioutil"
 	"net/http"
 	"sort"
-	"strconv"
 	"time"
 
 	"github.com/maxence-charriere/go-app/v9/pkg/app"
@@ -90,9 +89,9 @@ func (home *home) OnMount(ctx app.Context) {
 
 		sort.Slice(article, func(i, j int) bool {
 			dateString := "2021-11-22"
-			date1, error := time.Parse(article[i].Date, dateString)
-			date2, error := time.Parse(article[j].Date, dateString)
-			return date1 > date2
+			date1, _ := time.Parse(article[i].Date, dateString)
+			date2, _ := time.Parse(article[j].Date, dateString)
+			return date1.Before(date2)
 		})
 		home.article = article
 
