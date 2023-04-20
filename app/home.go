@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"sort"
 	"time"
+	"strings"
 
 	"github.com/maxence-charriere/go-app/v9/pkg/app"
 )
@@ -89,10 +90,14 @@ func (home *home) OnMount(ctx app.Context) {
 
 		sort.Slice(article, func(i, j int) bool {
 			dateString := "2006-01-02"
-			date1, _ := time.Parse(article[i].Date, dateString)
-			date2, _ := time.Parse(article[j].Date, dateString)
-			app.Log(date1)
-			app.Log(date2)
+			date1, error1 := time.Parse(strings.TrimSpace(article[i].Date), dateString)
+			if error1 != nil {
+    				app.Log(error1)
+			}
+			date2, error2 := time.Parse(strings.TrimSpace(article[j].Date), dateString)
+			if error2 != nil {
+    				app.Log(error2)
+			}
 			return date1.After(date2)
 		})
 		home.article = article
