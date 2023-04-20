@@ -13,6 +13,7 @@ type article struct {
 	app.Compo
 
 	item Content
+	piece Article
 	navbar app.UI
 }
 
@@ -42,7 +43,7 @@ func (a *article) Render() app.UI {
 						),
 					),
 					app.Div().Class("content").Body(
-						app.Raw("<div>"+content+"</div>"),
+						app.Raw("<div class='matches'>"+content+"</div>"),
 					),
 				),
 			),
@@ -64,10 +65,42 @@ func getNavbar(category string) app.UI {
 func (article *article) OnNav(ctx app.Context) {
 	path := strings.Split(ctx.Page().URL().Path, "/")
 	id := path[2]
-	// Launching a new goroutine:
+	id_int := strconv.Atoi(id)
+
+	if (id > 0 && id < 121) {
+		// Launching a new goroutine:
+		ctx.Async(func() {
+			app_key := app.Getenv("READ_KEY")
+			r, err := http.Get("https://api.spvgg-hambach.de/api/v1/content/" + id + "?appkey=" + app_key)
+			if err != nil {
+				app.Log(err)
+				return
+			}
+			defer r.Body.Close()
+
+			b, err := ioutil.ReadAll(r.Body)
+			if err != nil {
+				app.Log(err)
+				return
+			}
+
+			sb := string(b)
+
+			var content Content
+			json.Unmarshal([]byte(sb), &content)
+
+			article.navbar = getNavbar(content.Category)
+			article.item = content
+			article.Update()
+		})
+	}
+	newArticles(ctx, id)
+}
+
+func (article *article) newArticles(ctx app.Context, id string) {
 	ctx.Async(func() {
 		app_key := app.Getenv("READ_KEY")
-		r, err := http.Get("https://api.spvgg-hambach.de/api/v1/content/" + id + "?appkey=" + app_key)
+		r, err := http.Get("https://api.spvgg-hambach.de/api/v1/article/" + id + "?appkey=" + app_key)
 		if err != nil {
 			app.Log(err)
 			return
@@ -82,11 +115,11 @@ func (article *article) OnNav(ctx app.Context) {
 
 		sb := string(b)
 
-		var content Content
-		json.Unmarshal([]byte(sb), &content)
+		var article Article
+		json.Unmarshal([]byte(sb), &article)
 
-		article.navbar = getNavbar(content.Category)
-		article.item = content
+		article.navbar = getNavbar(article.Category)
+		article.piece = article
 		article.Update()
 	})
 }
