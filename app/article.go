@@ -94,33 +94,30 @@ func (article *article) OnNav(ctx app.Context) {
 			article.item = content
 			article.Update()
 		})
+	} else {
+		ctx.Async(func() {
+			app_key := app.Getenv("READ_KEY")
+			r, err := http.Get("https://api.spvgg-hambach.de/api/v1/article/" + id + "?appkey=" + app_key)
+			if err != nil {
+				app.Log(err)
+				return
+			}
+			defer r.Body.Close()
+	
+			b, err := ioutil.ReadAll(r.Body)
+			if err != nil {
+				app.Log(err)
+				return
+			}
+	
+			sb := string(b)
+	
+			var piece Article
+			json.Unmarshal([]byte(sb), &piece)
+	
+			article.navbar = getNavbar(piece.Category)
+			article.piece = piece
+			article.Update()
+		})
 	}
-	article.newArticles(ctx, id)
-}
-
-func (article *article) newArticles(ctx app.Context, id string) {
-	ctx.Async(func() {
-		app_key := app.Getenv("READ_KEY")
-		r, err := http.Get("https://api.spvgg-hambach.de/api/v1/article/" + id + "?appkey=" + app_key)
-		if err != nil {
-			app.Log(err)
-			return
-		}
-		defer r.Body.Close()
-
-		b, err := ioutil.ReadAll(r.Body)
-		if err != nil {
-			app.Log(err)
-			return
-		}
-
-		sb := string(b)
-
-		var piece Article
-		json.Unmarshal([]byte(sb), &piece)
-
-		article.navbar = getNavbar(piece.Category)
-		article.piece = piece
-		article.Update()
-	})
 }

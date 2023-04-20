@@ -91,7 +91,7 @@ func (home *home) OnMount(ctx app.Context) {
 			dateString := "2021-11-22"
 			date1, _ := time.Parse(article[i].Date, dateString)
 			date2, _ := time.Parse(article[j].Date, dateString)
-			return date1.Before(date2)
+			return date1.After(date2)
 		})
 		home.article = article
 
