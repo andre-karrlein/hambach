@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"strings"
+	"strconv"
 
 	"github.com/maxence-charriere/go-app/v9/pkg/app"
 )
@@ -67,7 +68,7 @@ func (article *article) OnNav(ctx app.Context) {
 	id := path[2]
 	id_int := strconv.Atoi(id)
 
-	if (id > 0 && id < 121) {
+	if (id_int > 0 && id_int < 121) {
 		// Launching a new goroutine:
 		ctx.Async(func() {
 			app_key := app.Getenv("READ_KEY")
@@ -94,7 +95,7 @@ func (article *article) OnNav(ctx app.Context) {
 			article.Update()
 		})
 	}
-	newArticles(ctx, id)
+	article.newArticles(ctx, id)
 }
 
 func (article *article) newArticles(ctx app.Context, id string) {
@@ -115,11 +116,11 @@ func (article *article) newArticles(ctx app.Context, id string) {
 
 		sb := string(b)
 
-		var article Article
-		json.Unmarshal([]byte(sb), &article)
+		var piece Article
+		json.Unmarshal([]byte(sb), &piece)
 
-		article.navbar = getNavbar(article.Category)
-		article.piece = article
+		article.navbar = getNavbar(piece.Category)
+		article.piece = piece
 		article.Update()
 	})
 }
