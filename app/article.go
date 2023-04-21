@@ -20,8 +20,24 @@ type article struct {
 
 func (a *article) Render() app.UI {
 
-	image := strings.Replace(a.item.Image, "public", "web", 1)
-	content := strings.ReplaceAll(a.item.Content, "/public", "")
+	image := ""
+	date := ""
+	title := ""
+	content := ""
+	if (piece != nil) {
+		image = a.piece.Image
+		date = a.piece.Date
+		title = a.piece.Title
+		content = a.piece.Content
+	} else {
+		image = a.item.Image
+		date = a.item.Date
+		title = a.item.Title
+		content = a.item.Content
+	}
+
+	image = strings.Replace(image, "public", "web", 1)
+	content = strings.ReplaceAll(content, "/public", "")
 	content = strings.ReplaceAll(content, "/images/", "/web/images/")
 	image = strings.Replace(image, "https://storage.googleapis.com/hambach/", "https://hambach.s3.eu-central-1.amazonaws.com/", 1)
 	content = strings.ReplaceAll(content, "https://storage.googleapis.com/hambach/", "https://hambach.s3.eu-central-1.amazonaws.com/")
@@ -39,8 +55,8 @@ func (a *article) Render() app.UI {
 							),
 						),
 						app.Div().Class("media-content").Body(
-							app.P().Class("title").Text(a.item.Title),
-							app.P().Class("subtitle").Text(a.item.Date),
+							app.P().Class("title").Text(title),
+							app.P().Class("subtitle").Text(date),
 						),
 					),
 					app.Div().Class("content").Body(

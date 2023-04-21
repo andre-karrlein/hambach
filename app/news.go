@@ -14,7 +14,7 @@ import (
 type news struct {
 	app.Compo
 
-	article []Content
+	article []Article
 }
 
 func (h *news) Render() app.UI {
@@ -23,16 +23,13 @@ func (h *news) Render() app.UI {
 		app.Section().Class("section is-medium").Body(
 			app.Div().Class("columns is-multiline").Body(
 				app.Range(h.article).Slice(func(i int) app.UI {
-					image := strings.Replace(h.article[i].Image, "https://storage.googleapis.com/hambach/", "https://hambach.s3.eu-central-1.amazonaws.com/", 1)
-					link := strings.Replace(h.article[i].Link, "https://storage.googleapis.com/hambach/", "https://hambach.s3.eu-central-1.amazonaws.com/", 1)
-			
 					return app.Div().Class("column is-one-quarter").Body(
 						app.If(h.article[i].Link == "",
 							app.A().Href("/article/"+h.article[i].ID).Body(
 								app.Div().Class("card equal-height").Style("background-color", "#008000").Body(
 									app.Div().Class("card-image card-image-half").Body(
 										app.Figure().Class("image").Body(
-											app.Img().Src(image),
+											app.Img().Src(h.article[i].Image),
 										),
 									),
 									app.Div().Class("card-content").Body(
@@ -41,11 +38,11 @@ func (h *news) Render() app.UI {
 								),
 							),
 						).Else(
-							app.A().Href(link).Body(
+							app.A().Href(h.article[i].Link).Body(
 								app.Div().Class("card equal-height").Style("background-color", "#008000").Body(
 									app.Div().Class("card-image card-image-half").Body(
 										app.Figure().Class("image").Body(
-											app.Img().Src(image),
+											app.Img().Src(h.article[i].Image),
 										),
 									),
 									app.Div().Class("card-content").Body(
@@ -66,7 +63,7 @@ func (news *news) OnMount(ctx app.Context) {
 	// Launching a new goroutine:
 	ctx.Async(func() {
 		app_key := app.Getenv("READ_KEY")
-		r, err := http.Get("https://api.spvgg-hambach.de/api/v1/content?appkey=" + app_key)
+		r, err := http.Get("https://api.spvgg-hambach.de/api/v1/article?appkey=" + app_key)
 		if err != nil {
 			app.Log(err)
 			return
@@ -81,24 +78,31 @@ func (news *news) OnMount(ctx app.Context) {
 
 		sb := string(b)
 
-		var result []Content
+		var result []Article
 		json.Unmarshal([]byte(sb), &result)
 
-		var content []Content
+		var article []Article
 		for _, element := range result {
 			if element.Type == "article" {
 				content = append(content, element)
 			}
 		}
 
-		sort.Slice(content, func(i, j int) bool {
-			content_i, _ := strconv.Atoi(content[i].ID)
-			content_j, _ := strconv.Atoi(content[j].ID)
-			return content_i > content_j
+		sort.Slice(article, func(i, j int) bool {
+			dateString := "2006-01-02"
+			date1, error1 := time.Parse(dateString, strings.TrimSpace(article[i].Date))
+			if error1 != nil {
+    				app.Log(error1)
+			}
+			date2, error2 := time.Parse(dateString, strings.TrimSpace(article[j].Date))
+			if error2 != nil {
+    				app.Log(error2)
+			}
+			return date1.After(date2)
 		})
-		news.article = content
+		news.article = article
 
-		app.Log(content)
+		app.Log(article)
 		news.Update()
 	})
 }
