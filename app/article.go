@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"io/ioutil"
 	"net/http"
-	"strings"
 	"strconv"
+	"strings"
 
 	"github.com/maxence-charriere/go-app/v9/pkg/app"
 )
@@ -13,10 +13,10 @@ import (
 type article struct {
 	app.Compo
 
-	item Content
-	piece Article
+	item   Content
+	piece  Article
 	navbar app.UI
-	new bool
+	new    bool
 }
 
 func (a *article) Render() app.UI {
@@ -25,11 +25,11 @@ func (a *article) Render() app.UI {
 	date := ""
 	title := ""
 	content := ""
-	if (a.new) {
+	if a.new {
 		image = a.piece.Image
 		date = a.piece.Date
 		title = a.piece.Title
-		content = a.piece.Content
+		content = mdToHTML([]byte(a.piece.Content))
 	} else {
 		image = a.item.Image
 		date = a.item.Date
@@ -84,7 +84,7 @@ func (article *article) OnNav(ctx app.Context) {
 	id := path[2]
 	id_int, _ := strconv.Atoi(id)
 
-	if (id_int > 0 && id_int < 121) {
+	if id_int > 0 && id_int < 121 {
 		// Launching a new goroutine:
 		ctx.Async(func() {
 			app_key := app.Getenv("READ_KEY")
@@ -120,18 +120,18 @@ func (article *article) OnNav(ctx app.Context) {
 				return
 			}
 			defer r.Body.Close()
-	
+
 			b, err := ioutil.ReadAll(r.Body)
 			if err != nil {
 				app.Log(err)
 				return
 			}
-	
+
 			sb := string(b)
-	
+
 			var piece Article
 			json.Unmarshal([]byte(sb), &piece)
-	
+
 			article.new = true
 			article.navbar = getNavbar(piece.Category)
 			article.piece = piece

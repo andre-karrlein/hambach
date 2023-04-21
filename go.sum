@@ -1,5 +1,9 @@
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/gomarkdown/markdown v0.0.0-20210408062403-ad838ccf8cdd/go.mod h1:aii0r/K0ZnHv7G0KF7xy1v0A7s2Ljrb5byB7MO5p6TU=
+github.com/gomarkdown/markdown v0.0.0-20230322041520-c84983bdbf2a h1:AWZzzFrqyjYlRloN6edwTLTUbKxf5flLXNuTBDm3Ews=
+github.com/gomarkdown/markdown v0.0.0-20230322041520-c84983bdbf2a/go.mod h1:JDGcbDT52eL4fju3sZ4TeHGsQwhG9nbDV21aMyhwPoA=
+github.com/gomarkdown/mdtohtml v0.0.0-20220720154245-d5126442bcee h1:K0HD10xVzFVXIvi//7xipQpvis/iIBShyjvkD43gs7E=
+github.com/gomarkdown/mdtohtml v0.0.0-20220720154245-d5126442bcee/go.mod h1:yQkMXrQ+Kf0W5KUNz8xIh1x14C3Hiyw/2j/zcUaDrwA=
 github.com/google/uuid v1.2.0 h1:qJYtXnJRWmpe7m/3XlyhrsLrEURqHRM2kxzoxXqyUDs=
 github.com/google/uuid v1.2.0/go.mod h1:TIyPZe4MgqvfeYDBFedMoGGpEw/LqOeaOT+nhxU+yHo=
 github.com/maxence-charriere/go-app/v9 v9.4.1 h1:uDrMIvjzkXwBjw5594i7ZqD5LY5iN7j1KeMImjWAYiw=
