@@ -35,13 +35,12 @@ func (a *article) Render() app.UI {
 		date = a.item.Date
 		title = a.item.Title
 		content = a.item.Content
+		image = strings.Replace(image, "public", "web", 1)
+		content = strings.ReplaceAll(content, "/public", "")
+		content = strings.ReplaceAll(content, "/images/", "/web/images/")
+		image = strings.Replace(image, "https://storage.googleapis.com/hambach/", "https://hambach.s3.eu-central-1.amazonaws.com/", 1)
+		content = strings.ReplaceAll(content, "https://storage.googleapis.com/hambach/", "https://hambach.s3.eu-central-1.amazonaws.com/")
 	}
-
-	image = strings.Replace(image, "public", "web", 1)
-	content = strings.ReplaceAll(content, "/public", "")
-	content = strings.ReplaceAll(content, "/images/", "/web/images/")
-	image = strings.Replace(image, "https://storage.googleapis.com/hambach/", "https://hambach.s3.eu-central-1.amazonaws.com/", 1)
-	content = strings.ReplaceAll(content, "https://storage.googleapis.com/hambach/", "https://hambach.s3.eu-central-1.amazonaws.com/")
 
 	return app.Div().Class("bg").Body(
 		a.navbar,
