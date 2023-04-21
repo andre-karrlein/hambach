@@ -24,7 +24,7 @@ func (a *article) Render() app.UI {
 	date := ""
 	title := ""
 	content := ""
-	if (piece != nil) {
+	if (a.piece != nil) {
 		image = a.piece.Image
 		date = a.piece.Date
 		title = a.piece.Title

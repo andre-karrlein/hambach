@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"sort"
 	"strings"
-	"strconv"
+	"time"
 
 	"github.com/maxence-charriere/go-app/v9/pkg/app"
 )
@@ -84,7 +84,7 @@ func (news *news) OnMount(ctx app.Context) {
 		var article []Article
 		for _, element := range result {
 			if element.Type == "article" {
-				content = append(content, element)
+				content = append(article, element)
 			}
 		}
 
