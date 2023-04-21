@@ -16,6 +16,7 @@ type article struct {
 	item Content
 	piece Article
 	navbar app.UI
+	new bool
 }
 
 func (a *article) Render() app.UI {
@@ -24,7 +25,7 @@ func (a *article) Render() app.UI {
 	date := ""
 	title := ""
 	content := ""
-	if (a.piece != nil) {
+	if (a.new) {
 		image = a.piece.Image
 		date = a.piece.Date
 		title = a.piece.Title
@@ -106,6 +107,7 @@ func (article *article) OnNav(ctx app.Context) {
 			var content Content
 			json.Unmarshal([]byte(sb), &content)
 
+			article.new = false
 			article.navbar = getNavbar(content.Category)
 			article.item = content
 			article.Update()
@@ -131,6 +133,7 @@ func (article *article) OnNav(ctx app.Context) {
 			var piece Article
 			json.Unmarshal([]byte(sb), &piece)
 	
+			article.new = true
 			article.navbar = getNavbar(piece.Category)
 			article.piece = piece
 			article.Update()

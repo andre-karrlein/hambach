@@ -84,7 +84,7 @@ func (news *news) OnMount(ctx app.Context) {
 		var article []Article
 		for _, element := range result {
 			if element.Type == "article" {
-				content = append(article, element)
+				article = append(article, element)
 			}
 		}
 
