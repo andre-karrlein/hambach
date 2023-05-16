@@ -69,7 +69,7 @@ func (n *navbar) Render() app.UI {
 						).Href("/article/32"),
 						app.A().Class("navbar-item").Text(
 							"Fitness und Gesundheit",
-						).Href("/article/09bb29a6-7eb2-4f80-90c7-c2fc414a05f"),
+						).Href("/article/09bb29a6-7eb2-4f80-90c7-c2fc414a05f6"),
 						app.A().Class("navbar-item").Text(
 							"Hallenbelegung",
 						).Href("/article/87"),
