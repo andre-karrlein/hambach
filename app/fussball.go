@@ -82,7 +82,7 @@ func (fn *fussballNavbar) Render() app.UI {
 					),
 				).OnClick(fn.youthDropdownClick),
 
-				app.A().Class("navbar-item").Href("/article/14").Text(
+				app.A().Class("navbar-item").Href("/article/25c12a9f-5fb8-4d86-a7d2-7ee01fd5f02a").Text(
 					"Senioren",
 				),
 				app.A().Class("navbar-item").Href("/article/72").Text(
