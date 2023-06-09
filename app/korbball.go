@@ -85,7 +85,7 @@ func (kn *korbballNavbar) Render() app.UI {
 						).Href("/article/34"),
 						app.A().Class("navbar-item").Text(
 							"Gymnastik",
-						).Href("/article/33"),
+						).Href("/article/ee40fc09-58be-486e-9bd5-9e8a7de96cfc"),
 						app.A().Class("navbar-item").Text(
 							"Freizetigruppe",
 						).Href("/article/32"),
