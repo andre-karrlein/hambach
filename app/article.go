@@ -60,7 +60,7 @@ func (a *article) Render() app.UI {
 						),
 					),
 					app.Div().Class("content").Body(
-						app.Raw("<div class='matches table-responsive-sm'>"+content+"</div>"),
+						app.Raw("<div class='matches table-container'>"+content+"</div>"),
 					),
 				),
 			),
