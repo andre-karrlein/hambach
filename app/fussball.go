@@ -50,31 +50,19 @@ func (fn *fussballNavbar) Render() app.UI {
 							"SG",
 						),
 						app.A().Class("navbar-item").Href("/article/16").Text(
-							"U18",
+							"U19",
 						),
 						app.A().Class("navbar-item").Href("/article/17").Text(
-							"U15-1",
-						),
-						app.A().Class("navbar-item").Href("/article/18").Text(
-							"U15-2",
+							"U15",
 						),
 						app.A().Class("navbar-item").Href("/article/19").Text(
-							"U13-1",
-						),
-						app.A().Class("navbar-item").Href("/article/20").Text(
-							"U13-2",
+							"U13",
 						),
 						app.A().Class("navbar-item").Href("/article/55").Text(
-							"U11-1",
-						),
-						app.A().Class("navbar-item").Href("/article/56").Text(
-							"U11-2",
+							"U11",
 						),
 						app.A().Class("navbar-item").Href("/article/57").Text(
 							"U9",
-						),
-						app.A().Class("navbar-item").Href("/article/58").Text(
-							"U8",
 						),
 						app.A().Class("navbar-item").Href("/article/59").Text(
 							"U7",
